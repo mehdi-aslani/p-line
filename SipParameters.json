@@ -1,0 +1,1357 @@
+{
+  "inbound_route_actions": {
+    "uid": "SIP Users",
+    "trunk": "Trunks",
+    "direct_dial": "Direct Dials",
+    "ivr": "Interactive Voice Response",
+    "queue": "Queues",
+    "time_condition": "Time Conditions",
+    "alias": "Alias Calls",
+    "announcement": "Announcements",
+    "ring_group": "Ring groups",
+    "interface": "P-Line Core Controller Interfaces",
+    "fax": "FAX",
+    "reject": "Reject"
+  },
+  "sip_profiles": {
+    "endpoint": [
+      [
+        "100rel",
+        "Custom",
+        { "no": "no", "required": "required", "yes": "yes" },
+        "yes",
+        "Allow support for RFC3262 provisional ACK tags"
+      ],
+      [
+        "accept_multiple_sdp_answers",
+        "Boolean",
+        null,
+        "no",
+        "Accept multiple SDP answers on non-100rel responses"
+      ],
+      [
+        "accountcode",
+        "String",
+        null,
+        "",
+        "An accountcode to set automatically on any channels created for this endpoint."
+      ],
+      ["acl", "String", null, "", "List of IP ACL section names in acl.conf"],
+      [
+        "aggregate_mwi",
+        "Boolean",
+        null,
+        "all",
+        "Condense MWI notifications into a single NOTIFY."
+      ],
+      [
+        "allow",
+        "Custom",
+        {
+          "ulaw": "u-law",
+          "alaw": "a-law",
+          "gsm": "gsm",
+          "h264": "h264",
+          "h263": "h263"
+        },
+        "ulaw",
+        "Media Codec(s) to allow",
+        true
+      ],
+      [
+        "allow_overlap",
+        "Boolean",
+        null,
+        "yes",
+        "Enable RFC3578 overlap dialing support."
+      ],
+      [
+        "allow_subscribe",
+        "Boolean",
+        null,
+        "yes",
+        "Determines if endpoint is allowed to initiate subscriptions with p-line."
+      ],
+      [
+        "allow_transfer",
+        "Boolean",
+        null,
+        "yes",
+        "Determines whether SIP REFER transfers are allowed for this endpoint"
+      ],
+      ["aors", "String", null, "", "AoR(s) to be used with the endpoint"],
+      [
+        "asymmetric_rtp_codec",
+        "Boolean",
+        null,
+        "no",
+        "Allow the sending and receiving RTP codec to differ"
+      ],
+      [
+        "auth",
+        "String",
+        null,
+        "",
+        "Authentication Object(s) associated with the endpoint"
+      ],
+      [
+        "bind_rtp_to_media_address",
+        "Boolean",
+        null,
+        "no",
+        "Bind the RTP instance to the media_address"
+      ],
+      ["bundle", "Boolean", null, "no", "Enable RTP bundling"],
+      [
+        "call_group",
+        "String",
+        null,
+        "",
+        "The numeric pickup groups for a channel."
+      ],
+      ["callerid", "String", null, "", "CallerID information for the endpoint"],
+      [
+        "callerid_privacy",
+        "Custom",
+        {
+          "allowed_not_screened": "allowed_not_screened",
+          "allowed_passed_screen": "allowed_passed_screen",
+          "allowed_failed_screen": "allowed_failed_screen",
+          "allowed": "allowed",
+          "prohib_not_screened": "prohib_not_screened",
+          "prohib_passed_screen": "prohib_passed_screen",
+          "prohib_failed_screen": "prohib_failed_screen",
+          "prohib": "prohib",
+          "unavailable": "unavailable"
+        },
+        "allowed_not_screened",
+        "Default privacy level"
+      ],
+      ["callerid_tag", "String", null, "", "Internal id_tag for the endpoint"],
+      [
+        "connected_line_method",
+        "Custom",
+        {
+          "invite": "invite - When set to invite, check the remote's Allow header and if UPDATE is allowed, send UPDATE instead of INVITE to avoid SDP renegotiation. If UPDATE is not Allowed, send INVITE",
+          "reinvite": "Alias for the invite value",
+          "update": "update - If set to update, send UPDATE regardless of what the remote Allows"
+        },
+        "invite",
+        "Connected line method type"
+      ],
+      [
+        "contact_acl",
+        "String",
+        null,
+        "",
+        "List of Contact ACL section names in acl.conf"
+      ],
+      [
+        "contact_deny",
+        "String",
+        null,
+        "",
+        "List of Contact header addresses to deny"
+      ],
+      [
+        "contact_permit",
+        "String",
+        null,
+        "",
+        "List of Contact header addresses to permit"
+      ],
+      [
+        "contact_user",
+        "String",
+        null,
+        "",
+        "Force the user on the outgoing Contact header to this value."
+      ],
+      [
+        "context",
+        "String",
+        null,
+        "default",
+        "Dialplan context for inbound sessions"
+      ],
+      ["cos_audio", "Integer", null, "0", "Priority for audio streams"],
+      ["cos_video", "Integer", null, "0", "Priority for video streams"],
+      ["deny", "String", null, "", "List of IP addresses to deny access from"],
+      [
+        "device_state_busy_at",
+        "Integer",
+        null,
+        "0",
+        "The number of in-use channels which will cause busy to be returned as device state"
+      ],
+      [
+        "direct_media",
+        "Boolean",
+        null,
+        "yes",
+        "Determines whether media may flow directly between endpoints."
+      ],
+      [
+        "direct_media_glare_mitigation",
+        "Custom",
+        {
+          "none": "none",
+          "outgoing": "outgoing",
+          "incoming": "incoming"
+        },
+        "none",
+        "Mitigation of direct media (re)INVITE glare"
+      ],
+      [
+        "direct_media_method",
+        "Custom",
+        {
+          "invite": "invite",
+          "reinvite": "reinvite - Alias for the invite value",
+          "update": "update"
+        },
+        "invite",
+        "Direct Media method type"
+      ],
+      [
+        "disable_direct_media_on_nat",
+        "Boolean",
+        null,
+        "no",
+        "Disable direct media session refreshes when NAT obstructs the media session"
+      ],
+      [
+        "dtls_auto_generate_cert",
+        "String",
+        null,
+        "no",
+        "Whether or not to automatically generate an ephemeral X.509 certificate"
+      ],
+      [
+        "dtls_ca_file",
+        "String",
+        null,
+        "",
+        "Path to certificate authority certificate"
+      ],
+      [
+        "dtls_ca_path",
+        "String",
+        null,
+        "",
+        "Path to a directory containing certificate authority certificates"
+      ],
+      [
+        "dtls_cert_file",
+        "String",
+        null,
+        "",
+        "Path to certificate file to present to peer"
+      ],
+      ["dtls_cipher", "String", null, "", "Cipher to use for DTLS negotiation"],
+      [
+        "dtls_fingerprint",
+        "String",
+        null,
+        "",
+        "Type of hash to use for the DTLS fingerprint in the SDP."
+      ],
+      [
+        "dtls_private_key",
+        "String",
+        null,
+        "",
+        "Path to private key for certificate file"
+      ],
+      [
+        "dtls_rekey",
+        "String",
+        null,
+        "0",
+        "Interval at which to renegotiate the TLS session and rekey the SRTP session"
+      ],
+      [
+        "dtls_setup",
+        "String",
+        null,
+        "",
+        "Whether we are willing to accept connections, connect to the other party, or both."
+      ],
+      [
+        "dtls_verify",
+        "String",
+        null,
+        "no",
+        "Verify that the provided peer certificate is valid"
+      ],
+      [
+        "dtmf_mode",
+        "Custom",
+        {
+          "rfc4733": "rfc4733 - DTMF is sent out of band of the main audio stream. This supercedes the older RFC-2833 used within the older chan_sip",
+          "inband": "inband - DTMF is sent as part of audio stream",
+          "info": "info - DTMF is sent as SIP INFO packets",
+          "auto": "auto - DTMF is sent as RFC 4733 if the other side supports it or as INBAND if not",
+          "auto_info": "auto_info - DTMF is sent as RFC 4733 if the other side supports it or as SIP INFO if not"
+        },
+        "rfc4733",
+        "DTMF mode"
+      ],
+      [
+        "fax_detect",
+        "Boolean",
+        null,
+        "no",
+        "Whether CNG tone detection is enabled"
+      ],
+      [
+        "fax_detect_timeout",
+        "Integer",
+        null,
+        "0",
+        "How long into a call before fax_detect is disabled for the call"
+      ],
+      [
+        "follow_early_media_fork",
+        "Boolean",
+        null,
+        "yes",
+        "Follow SDP forked media when To tag is different"
+      ],
+      [
+        "force_avp",
+        "Boolean",
+        null,
+        "no",
+        "Determines whether res_pjsip will use and enforce usage of AVP, regardless of the RTP profile in use for this endpoint."
+      ],
+      ["force_rport", "Boolean", null, "yes", "Force use of return port"],
+      [
+        "from_domain",
+        "String",
+        null,
+        "",
+        "Domain to user in From header for requests to this endpoint."
+      ],
+      [
+        "from_user",
+        "String",
+        null,
+        "",
+        "Username to use in From header for requests to this endpoint."
+      ],
+      [
+        "g726_non_standard",
+        "Boolean",
+        null,
+        "no",
+        "Force g.726 to use AAL2 packing order when negotiating g.726 audio"
+      ],
+      [
+        "ice_support",
+        "Boolean",
+        null,
+        "no",
+        "Enable the ICE mechanism to help traverse NAT"
+      ],
+      [
+        "identify_by",
+        "String",
+        null,
+        "username,ip",
+        "Way(s) for the endpoint to be identified"
+      ],
+      [
+        "inband_progress",
+        "Boolean",
+        null,
+        "no",
+        "Determines whether chan_pjsip will indicate ringing using inband progress."
+      ],
+      [
+        "incoming_mwi_mailbox",
+        "String",
+        null,
+        "",
+        "Mailbox name to use when incoming MWI NOTIFYs are received"
+      ],
+      [
+        "language",
+        "String",
+        null,
+        "",
+        "Set the default language to use for channels created for this endpoint."
+      ],
+      [
+        "mailboxes",
+        "String",
+        null,
+        "",
+        "NOTIFY the endpoint when state changes for any of the specified mailboxes"
+      ],
+      [
+        "max_audio_streams",
+        "Integer",
+        null,
+        "1",
+        "The maximum number of allowed audio streams for the endpoint"
+      ],
+      [
+        "max_video_streams",
+        "Integer",
+        null,
+        "1",
+        "The maximum number of allowed video streams for the endpoint"
+      ],
+      [
+        "media_address",
+        "String",
+        null,
+        "",
+        "IP address used in SDP for media handling"
+      ],
+      [
+        "media_encryption",
+        "String",
+        null,
+        "no",
+        "Determines whether res_pjsip will use and enforce usage of media encryption for this endpoint."
+      ],
+      [
+        "media_encryption_optimistic",
+        "Boolean",
+        null,
+        "no",
+        "Determines whether encryption should be used if possible but does not terminate the session if not achieved."
+      ],
+      [
+        "media_use_received_transport",
+        "Boolean",
+        null,
+        "no",
+        "Determines whether res_pjsip will use the media transport received in the offer SDP in the corresponding answer SDP."
+      ],
+      [
+        "message_context",
+        "String",
+        null,
+        "",
+        "Context to route incoming MESSAGE requests to."
+      ],
+      [
+        "moh_passthrough",
+        "Boolean",
+        null,
+        "no",
+        "Determines whether hold and unhold will be passed through using re-INVITEs with recvonly and sendrecv to the remote side"
+      ],
+      ["moh_suggest", "String", null, "default", "Default Music On Hold class"],
+      [
+        "mwi_from_user",
+        "String",
+        null,
+        "",
+        "Username to use in From header for unsolicited MWI NOTIFYs to this endpoint."
+      ],
+      [
+        "mwi_subscribe_replaces_unsolicited",
+        "Boolean",
+        null,
+        "no",
+        "An MWI subscribe will replace sending unsolicited NOTIFYs"
+      ],
+      [
+        "named_call_group",
+        "String",
+        null,
+        "",
+        "The named pickup groups for a channel."
+      ],
+      [
+        "named_pickup_group",
+        "String",
+        null,
+        "",
+        "The named pickup groups that a channel can pickup."
+      ],
+      [
+        "notify_early_inuse_ringing",
+        "Boolean",
+        null,
+        "no",
+        "Whether to notifies dialog-info 'early' on InUse&Ringing state"
+      ],
+      [
+        "one_touch_recording",
+        "Boolean",
+        null,
+        "no",
+        "Determines whether one-touch recording is allowed for this endpoint."
+      ],
+      [
+        "outbound_auth",
+        "String",
+        null,
+        "",
+        "Authentication object(s) used for outbound requests"
+      ],
+      [
+        "outbound_proxy",
+        "String",
+        null,
+        "",
+        "Full SIP URI of the outbound proxy used to send requests"
+      ],
+      [
+        "permit",
+        "String",
+        null,
+        "",
+        "List of IP addresses to permit access from"
+      ],
+      [
+        "pickup_group",
+        "String",
+        null,
+        "",
+        "The numeric pickup groups that a channel can pickup."
+      ],
+      [
+        "preferred_codec_only",
+        "Boolean",
+        null,
+        "no",
+        "Respond to a SIP invite with the single most preferred codec rather than advertising all joint codec capabilities. This limits the other side's codec choice to exactly what we prefer."
+      ],
+      [
+        "record_off_feature",
+        "String",
+        null,
+        "automixmon",
+        "The feature to enact when one-touch recording is turned off."
+      ],
+      [
+        "record_on_feature",
+        "String",
+        null,
+        "automixmon",
+        "The feature to enact when one-touch recording is turned on."
+      ],
+      [
+        "redirect_method",
+        "Custom",
+        {
+          "user": "user",
+          "uri_core": "uri_core",
+          "uri_pjsip": "uri_pjsip"
+        },
+        "user",
+        "How redirects received from an endpoint are handled"
+      ],
+      [
+        "refer_blind_progress",
+        "Boolean",
+        null,
+        "yes",
+        "Whether to notifies all the progress details on blind transfer"
+      ],
+      [
+        "rewrite_contact",
+        "Boolean",
+        null,
+        "no",
+        "Allow Contact header to be rewritten with the source IP address-port"
+      ],
+      [
+        "rpid_immediate",
+        "Boolean",
+        null,
+        "no",
+        "Immediately send connected line updates on unanswered incoming calls."
+      ],
+      [
+        "rtcp_mux",
+        "Boolean",
+        null,
+        "no",
+        "Enable RFC 5761 RTCP multiplexing on the RTP port"
+      ],
+      [
+        "rtp_engine",
+        "String",
+        null,
+        "p-line",
+        "Name of the RTP engine to use for channels created for this endpoint"
+      ],
+      ["rtp_ipv6", "Boolean", null, "no", "Allow use of IPv6 for RTP traffic"],
+      [
+        "rtp_keepalive",
+        "Integer",
+        null,
+        "0",
+        "Number of seconds between RTP comfort noise keepalive packets."
+      ],
+      [
+        "rtp_symmetric",
+        "Boolean",
+        null,
+        "no",
+        "Enforce that RTP must be symmetric"
+      ],
+      [
+        "rtp_timeout",
+        "Integer",
+        null,
+        "0",
+        "Maximum number of seconds without receiving RTP (while off hold) before terminating call."
+      ],
+      [
+        "rtp_timeout_hold",
+        "Integer",
+        null,
+        "0",
+        "Maximum number of seconds without receiving RTP (while on hold) before terminating call."
+      ],
+      [
+        "sdp_owner",
+        "String",
+        null,
+        "p-line-sdp",
+        "String placed as the username portion of an SDP origin (o=) line."
+      ],
+      [
+        "sdp_session",
+        "String",
+        null,
+        "p-line",
+        "String used for the SDP session (s=) line."
+      ],
+      [
+        "send_diversion",
+        "Boolean",
+        null,
+        "yes",
+        "Send the Diversion header, conveying the diversion information to the called user agent"
+      ],
+      [
+        "send_pai",
+        "Boolean",
+        null,
+        "no",
+        "Send the P-Asserted-Identity header"
+      ],
+      ["send_rpid", "Boolean", null, "no", "Send the Remote-Party-ID header"],
+      [
+        "set_var",
+        "String",
+        null,
+        "",
+        "Variable set on a channel involving the endpoint."
+      ],
+      [
+        "srtp_tag_32",
+        "Boolean",
+        null,
+        "no",
+        "Determines whether 32 byte tags should be used instead of 80 byte tags."
+      ],
+      [
+        "sub_min_expiry",
+        "Integer",
+        null,
+        "0",
+        "The minimum allowed expiry time for subscriptions initiated by the endpoint."
+      ],
+      [
+        "subscribe_context",
+        "String",
+        null,
+        "",
+        "Context for incoming MESSAGE requests."
+      ],
+      [
+        "suppress_q850_reason_headers",
+        "Boolean",
+        null,
+        "no",
+        "Suppress Q.850 Reason headers for this endpoint"
+      ],
+      [
+        "t38_udptl",
+        "Boolean",
+        null,
+        "no",
+        "Whether T.38 UDPTL support is enabled or not"
+      ],
+      [
+        "t38_udptl_ec",
+        "String",
+        null,
+        "none",
+        "T.38 UDPTL error correction method"
+      ],
+      [
+        "t38_udptl_ipv6",
+        "Boolean",
+        null,
+        "no",
+        "Whether IPv6 is used for UDPTL Sessions"
+      ],
+      [
+        "t38_udptl_maxdatagram",
+        "Integer",
+        null,
+        "0",
+        "T.38 UDPTL maximum datagram size"
+      ],
+      [
+        "t38_udptl_nat",
+        "Boolean",
+        null,
+        "no",
+        "Whether NAT support is enabled on UDPTL sessions"
+      ],
+      [
+        "timers",
+        "Custom",
+        {
+          "no": "no",
+          "yes": "yes",
+          "required": "required",
+          "always": "always",
+          "forced": "forced - Alias of always"
+        },
+        "yes",
+        "Session timers for SIP packets"
+      ],
+      [
+        "timers_min_se",
+        "Integer",
+        null,
+        "90",
+        "Minimum session timers expiration period"
+      ],
+      [
+        "timers_sess_expires",
+        "Integer",
+        null,
+        "1800",
+        "Maximum session timer expiration period"
+      ],
+      [
+        "tone_zone",
+        "String",
+        null,
+        "",
+        "Set which country's indications to use for channels created for this endpoint."
+      ],
+      ["tos_audio", "String", null, "0", "DSCP TOS bits for audio streams"],
+      ["tos_video", "String", null, "0", "DSCP TOS bits for video streams"],
+      [
+        "transport",
+        "String",
+        null,
+        "",
+        "Explicit transport configuration to use"
+      ],
+      [
+        "trust_id_inbound",
+        "Boolean",
+        null,
+        "no",
+        "Accept identification information received from this endpoint"
+      ],
+      [
+        "trust_id_outbound",
+        "Boolean",
+        null,
+        "no",
+        "Send private identification details to the endpoint."
+      ],
+      [
+        "use_avpf",
+        "Boolean",
+        null,
+        "no",
+        "Determines whether res_pjsip will use and enforce usage of AVPF for this endpoint."
+      ],
+      [
+        "use_ptime",
+        "Boolean",
+        null,
+        "no",
+        "Use Endpoint's requested packetization interval"
+      ],
+      [
+        "user_eq_phone",
+        "Boolean",
+        null,
+        "no",
+        "Determines whether a user=phone parameter is placed into the request URI if the user is determined to be a phone number"
+      ],
+      [
+        "voicemail_extension",
+        "String",
+        null,
+        "",
+        "The voicemail extension to send in the NOTIFY Message-Account header"
+      ],
+      [
+        "webrtc",
+        "Boolean",
+        null,
+        "no",
+        "Defaults and enables some options that are relevant to WebRTC"
+      ]
+    ],
+    "auth": [
+      [
+        "auth_type",
+        "Custom",
+        {
+          "md5": "md5",
+          "userpass": "userpass",
+          "google_oauth": "google_oauth"
+        },
+        "userpass",
+        "Authentication type"
+      ],
+      [
+        "nonce_lifetime",
+        "Integer",
+        null,
+        "32",
+        "Lifetime of a nonce associated with this authentication config."
+      ],
+      ["md5_cred", "String", null, "", "MD5 Hash used for authentication."],
+      [
+        "password",
+        "String",
+        null,
+        "",
+        "Plain text password used for authentication."
+      ],
+      ["realm", "String", null, "", "SIP realm for endpoint"],
+      ["username", "String", null, "", "Username to use for account"]
+    ],
+    "transport": [
+      [
+        "bind",
+        "String",
+        null,
+        "",
+        "IP Address and optional port to bind to for this transport"
+      ],
+      [
+        "ca_list_file",
+        "String",
+        null,
+        "",
+        "File containing a list of certificates to read (TLS ONLY, not WSS)"
+      ],
+      [
+        "ca_list_path",
+        "String",
+        null,
+        "",
+        "Path to directory containing a list of certificates to read (TLS ONLY, not WSS)"
+      ],
+      [
+        "cert_file",
+        "String",
+        null,
+        "",
+        "Certificate file for endpoint (TLS ONLY, not WSS)"
+      ],
+      [
+        "cipher",
+        "String",
+        null,
+        "",
+        "Preferred cryptography cipher names (TLS ONLY, not WSS)"
+      ],
+      ["domain", "String", null, "", "Domain the transport comes from"],
+      [
+        "external_media_address",
+        "String",
+        null,
+        "",
+        "External IP address to use in RTP handling"
+      ],
+      [
+        "external_signaling_address",
+        "String",
+        null,
+        "",
+        "External address for SIP signalling"
+      ],
+      [
+        "external_signaling_port",
+        "Integer",
+        null,
+        "0",
+        "External port for SIP signalling"
+      ],
+      [
+        "method",
+        "Custom",
+        {
+          "default": "default - The default as defined by PJSIP. This is currently TLSv1, but may change with future releases",
+          "unspecified": "unspecified - This option is equivalent to setting 'default'",
+          "tlsv1": "tlsv1",
+          "tlsv1_1": "tlsv1_1",
+          "tlsv1_2": "tlsv1_2",
+          "sslv2": "sslv2",
+          "sslv3": "sslv3",
+          "sslv23": "sslv23"
+        },
+        "",
+        "Method of SSL transport (TLS ONLY, not WSS)"
+      ],
+      [
+        "local_net",
+        "String",
+        null,
+        "",
+        "Network to consider local (used for NAT purposes)."
+      ],
+      ["password", "String", null, "", "Password required for transport"],
+      [
+        "priv_key_file",
+        "String",
+        null,
+        "",
+        "Private key file (TLS ONLY, not WSS)"
+      ],
+      [
+        "protocol",
+        "Custom",
+        {
+          "udp": "udp",
+          "tcp": "tcp",
+          "tls": "tls",
+          "ws": "ws",
+          "wss": "wss"
+        },
+        "udp",
+        "Protocol to use for SIP traffic",
+        true
+      ],
+      [
+        "require_client_cert",
+        "String",
+        null,
+        "",
+        "Require client certificate (TLS ONLY, not WSS)"
+      ],
+      [
+        "verify_client",
+        "String",
+        null,
+        "",
+        "Require verification of client certificate (TLS ONLY, not WSS)"
+      ],
+      [
+        "verify_server",
+        "String",
+        null,
+        "",
+        "Require verification of server certificate (TLS ONLY, not WSS)"
+      ],
+      [
+        "tos",
+        "String",
+        null,
+        "0",
+        "Enable TOS for the signalling sent over this transport"
+      ],
+      [
+        "cos",
+        "Integer",
+        null,
+        "0",
+        "Enable COS for the signalling sent over this transport"
+      ],
+      [
+        "websocket_write_timeout",
+        "Integer",
+        null,
+        "100",
+        "The timeout (in milliseconds) to set on WebSocket connections."
+      ],
+      [
+        "allow_reload",
+        "Boolean",
+        null,
+        "no",
+        "Allow this transport to be reloaded."
+      ],
+      [
+        "symmetric_transport",
+        "Boolean",
+        null,
+        "no",
+        "Use the same transport for outgoing requests as incoming ones."
+      ]
+    ],
+    "contact": [
+      ["uri", "String", null, "", "SIP URI to contact peer"],
+      ["expiration_time", "String", null, "", "Time to keep alive a contact"],
+      [
+        "qualify_frequency",
+        "Integer",
+        null,
+        "0",
+        "Interval at which to qualify a contact"
+      ],
+      ["qualify_timeout", "Integer", null, "3", "Timeout for qualify"],
+      [
+        "authenticate_qualify",
+        "Boolean",
+        null,
+        "no",
+        "Authenticates a qualify challenge response if needed"
+      ],
+      [
+        "outbound_proxy",
+        "String",
+        null,
+        "",
+        "Outbound proxy used when sending OPTIONS request"
+      ],
+      [
+        "path",
+        "String",
+        null,
+        "",
+        "Stored Path vector for use in Route headers on outgoing requests."
+      ],
+      [
+        "user_agent",
+        "String",
+        null,
+        "p-line pbx version 2.0.01",
+        "User-Agent header from registration."
+      ],
+      ["endpoint", "String", null, "", "Endpoint name"],
+      ["reg_server", "String", null, "", "p-line Server name"],
+      [
+        "via_addr",
+        "String",
+        null,
+        "",
+        "IP-address of the last Via header from registration."
+      ],
+      [
+        "via_port",
+        "Integer",
+        null,
+        "0",
+        "IP-port of the last Via header from registration."
+      ],
+      ["call_id", "String", null, "", "Call-ID header from registration."],
+      [
+        "prune_on_boot",
+        "Boolean",
+        null,
+        "no",
+        "A contact that cannot survive a restart/boot."
+      ]
+    ],
+    "aor": [
+      ["contact", "String", null, "", "Permanent contacts assigned to AoR"],
+      [
+        "default_expiration",
+        "Integer",
+        null,
+        "3600",
+        "Default expiration time in seconds for contacts that are dynamically bound to an AoR."
+      ],
+      [
+        "mailboxes",
+        "String",
+        null,
+        "",
+        "Allow subscriptions for the specified mailbox(es)"
+      ],
+      [
+        "voicemail_extension",
+        "String",
+        null,
+        "",
+        "The voicemail extension to send in the NOTIFY Message-Account header"
+      ],
+      [
+        "maximum_expiration",
+        "Integer",
+        null,
+        "7200",
+        "Maximum time to keep an AoR"
+      ],
+      [
+        "max_contacts",
+        "Integer",
+        null,
+        "0",
+        "Maximum number of contacts that can bind to an AoR"
+      ],
+      [
+        "minimum_expiration",
+        "Integer",
+        null,
+        "60",
+        "Minimum keep alive time for an AoR"
+      ],
+      [
+        "remove_existing",
+        "Boolean",
+        null,
+        "no",
+        "Determines whether new contacts replace existing ones."
+      ],
+      [
+        "qualify_frequency",
+        "Integer",
+        null,
+        "0",
+        "Interval at which to qualify an AoR"
+      ],
+      ["qualify_timeout", "Integer", null, "3", "Timeout for qualify"],
+      [
+        "authenticate_qualify",
+        "Boolean",
+        null,
+        "no",
+        "Authenticates a qualify challenge response if needed"
+      ],
+      [
+        "outbound_proxy",
+        "String",
+        null,
+        "",
+        "Outbound proxy used when sending OPTIONS request"
+      ],
+      [
+        "support_path",
+        "Boolean",
+        null,
+        "no",
+        "Enables Path support for REGISTER requests and Route support for other requests."
+      ]
+    ],
+    "system": [
+      [
+        "timer_t1",
+        "Integer",
+        null,
+        "500",
+        "Set transaction timer T1 value (milliseconds)."
+      ],
+      [
+        "timer_b",
+        "Integer",
+        null,
+        "32000",
+        "Set transaction timer B value (milliseconds)."
+      ],
+      [
+        "compact_headers",
+        "Boolean",
+        null,
+        "no",
+        "Use the short forms of common SIP header names."
+      ],
+      [
+        "threadpool_initial_size",
+        "Integer",
+        null,
+        "0",
+        "Initial number of threads in the res_pjsip threadpool."
+      ],
+      [
+        "threadpool_auto_increment",
+        "Integer",
+        null,
+        "5",
+        "The amount by which the number of threads is incremented when necessary."
+      ],
+      [
+        "threadpool_idle_timeout",
+        "Integer",
+        null,
+        "60",
+        "Number of seconds before an idle thread should be disposed of."
+      ],
+      [
+        "threadpool_max_size",
+        "Integer",
+        null,
+        "50",
+        "Maximum number of threads in the res_pjsip threadpool. A value of 0 indicates no maximum."
+      ],
+      [
+        "disable_tcp_switch",
+        "Boolean",
+        null,
+        "yes",
+        "Disable automatic switching from UDP to TCP transports."
+      ],
+      [
+        "follow_early_media_fork",
+        "Boolean",
+        null,
+        "yes",
+        "Follow SDP forked media when To tag is different"
+      ],
+      [
+        "accept_multiple_sdp_answers",
+        "Boolean",
+        null,
+        "no",
+        "Follow SDP forked media when To tag is the same"
+      ]
+    ],
+    "global": [
+      [
+        "max_forwards",
+        "Integer",
+        null,
+        "70",
+        "Value used in Max-Forwards header for SIP requests."
+      ],
+      [
+        "keep_alive_interval",
+        "Integer",
+        null,
+        "90",
+        "The interval (in seconds) to send keepalives to active connection-oriented transports."
+      ],
+      [
+        "contact_expiration_check_interval",
+        "Integer",
+        null,
+        "30",
+        "The interval (in seconds) to check for expired contacts."
+      ],
+      [
+        "disable_multi_domain",
+        "Boolean",
+        null,
+        "no",
+        "Disable Multi Domain support"
+      ],
+      [
+        "max_initial_qualify_time",
+        "Integer",
+        null,
+        "0",
+        "The maximum amount of time from startup that qualifies should be attempted on all contacts. If greater than the qualify_frequency for an aor, qualify_frequency will be used instead."
+      ],
+      [
+        "unidentified_request_period",
+        "Integer",
+        null,
+        "5",
+        "The number of seconds over which to accumulate unidentified requests."
+      ],
+      [
+        "unidentified_request_count",
+        "Integer",
+        null,
+        "5",
+        "The number of unidentified requests from a single IP to allow."
+      ],
+      [
+        "unidentified_request_prune_interval",
+        "Integer",
+        null,
+        "30",
+        "The interval at which unidentified requests are older than twice the unidentified_request_period are pruned."
+      ],
+      [
+        "user_agent",
+        "String",
+        null,
+        "p-line PBX GIT-15-e5a5948",
+        "Value used in User-Agent header for SIP requests and Server header for SIP responses."
+      ],
+      [
+        "regcontext",
+        "String",
+        null,
+        "",
+        "When set, p-line will dynamically create and destroy a NoOp priority 1 extension for a given peer who registers or unregisters with us."
+      ],
+      [
+        "default_outbound_endpoint",
+        "String",
+        null,
+        "default_outbound_endpoint",
+        "Endpoint to use when sending an outbound request to a URI without a specified endpoint."
+      ],
+      [
+        "default_voicemail_extension",
+        "String",
+        null,
+        "",
+        "The voicemail extension to send in the NOTIFY Message-Account header if not specified on endpoint or aor"
+      ],
+      [
+        "debug",
+        "String",
+        "no",
+        "Enable/Disable SIP debug logging. Valid options include yes",
+        "no or a host address"
+      ],
+      [
+        "endpoint_identifier_order",
+        "String",
+        null,
+        "ip,username,anonymous",
+        "The order by which endpoint identifiers are processed and checked. Identifier names are usually derived from and can be found in the endpoint identifier module itself (res_pjsip_endpoint_identifier_*). You can use the CLI command \"pjsip show identifiers\" to see the identifiers currently available."
+      ],
+      [
+        "default_from_user",
+        "String",
+        null,
+        "p-line",
+        "When p-line generates an outgoing SIP request, the From header username will be set to this value if there is no better option (such as CallerID) to be used."
+      ],
+      [
+        "default_realm",
+        "String",
+        null,
+        "p-line",
+        "When p-line generates a challenge, the digest realm will be set to this value if there is no better option (such as auth/realm) to be used."
+      ],
+      [
+        "mwi_tps_queue_high",
+        "Integer",
+        null,
+        "500",
+        "MWI taskprocessor high water alert trigger level."
+      ],
+      [
+        "mwi_tps_queue_low",
+        "Integer",
+        null,
+        "-1",
+        "MWI taskprocessor low water clear alert level."
+      ],
+      [
+        "mwi_disable_initial_unsolicited",
+        "Boolean",
+        null,
+        "no",
+        "Enable/Disable sending unsolicited MWI to all endpoints on startup."
+      ],
+      [
+        "ignore_uri_user_options",
+        "Boolean",
+        null,
+        "no",
+        "Enable/Disable ignoring SIP URI user field options."
+      ]
+    ]
+  }
+}
