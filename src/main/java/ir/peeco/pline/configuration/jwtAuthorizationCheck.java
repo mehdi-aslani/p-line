@@ -64,11 +64,15 @@ public class jwtAuthorizationCheck implements Filter {
     }
     var jwtParser = Jwts.parser().setSigningKey(jwtSecret);
     if (jwtParser.isSigned(token)) {
-      Long id = Long.parseLong(jwtParser.parseClaimsJws(token).getBody().getId());
+      // Long id = Long.parseLong(jwtParser.parseClaimsJws(token).getBody().getId());
       HttpSession session = httpRequest.getSession();
-      Optional<PlineUser> user = usersRepository.findById(id);
-      session.setAttribute("user", user.get());
-      chain.doFilter(httpRequest, response);
+      Optional<PlineUser> user = usersRepository.findByToken(token);
+      if (user.isPresent()) {
+        session.setAttribute("user", user.get());
+        chain.doFilter(httpRequest, response);
+      } else {
+        ((HttpServletResponse) response).setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+      }
     } else {
       ((HttpServletResponse) response).setStatus(HttpServletResponse.SC_UNAUTHORIZED);
     }

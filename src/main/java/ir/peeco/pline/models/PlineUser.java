@@ -9,7 +9,10 @@ import javax.persistence.*;
 
 @Data
 @Entity(name = "tbl_users")
-@Table(indexes = { @Index(name = "tbl_uers_name_index", columnList = "username", unique = true) })
+@Table(indexes = {
+        @Index(name = "tbl_uers_name_index", columnList = "username", unique = true),
+        @Index(name = "tbl_uers_token_index", columnList = "token", unique = true)
+})
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PUBLIC, force = true)
 public class PlineUser {

@@ -1,0 +1,18 @@
+2022-12-01 01:52:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table tbl_inbound_route_action (id bigint not null, action varchar(255) not null, options varchar(255) not null, [*]value varchar(255) not null, tbl_inbound_route_id bigint, primary key (id))"; expected "identifier"; SQL statement:
+create table tbl_inbound_route_action (id bigint not null, action varchar(255) not null, options varchar(255) not null, value varchar(255) not null, tbl_inbound_route_id bigint, primary key (id)) [42001-214]
+2022-12-01 01:52:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TBL_INBOUND_ROUTE_ACTION" not found; SQL statement:
+alter table tbl_inbound_route_action add constraint FK4uvf2dtqx087y5l9sc1rhy10t foreign key (tbl_inbound_route_id) references tbl_inbound_route [42102-214]
+2022-12-01 01:53:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table tbl_inbound_route_action (id bigint not null, action varchar(255) not null, options varchar(255) not null, [*]value varchar(255) not null, tbl_inbound_route_id bigint, primary key (id))"; expected "identifier"; SQL statement:
+create table tbl_inbound_route_action (id bigint not null, action varchar(255) not null, options varchar(255) not null, value varchar(255) not null, tbl_inbound_route_id bigint, primary key (id)) [42001-214]
+2022-12-01 01:53:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TBL_INBOUND_ROUTE_ACTION" not found; SQL statement:
+alter table tbl_inbound_route_action add constraint FK4uvf2dtqx087y5l9sc1rhy10t foreign key (tbl_inbound_route_id) references tbl_inbound_route [42102-214]
+2022-12-01 01:53:52 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table tbl_inbound_route_action (id bigint not null, action varchar(255) not null, options varchar(255) not null, [*]value varchar(255) not null, tbl_inbound_route_id bigint, primary key (id))"; expected "identifier"; SQL statement:
+create table tbl_inbound_route_action (id bigint not null, action varchar(255) not null, options varchar(255) not null, value varchar(255) not null, tbl_inbound_route_id bigint, primary key (id)) [42001-214]
+2022-12-01 01:53:52 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TBL_INBOUND_ROUTE_ACTION" not found; SQL statement:
+alter table tbl_inbound_route_action add constraint FK4uvf2dtqx087y5l9sc1rhy10t foreign key (tbl_inbound_route_id) references tbl_inbound_route [42102-214]
