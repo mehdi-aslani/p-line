@@ -15,12 +15,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Jwts;
 import ir.peeco.pline.models.PlineUser;
 import ir.peeco.pline.repositories.PlineUsersRepository;
 
+@Order(1)
 @Component
 public class jwtAuthorizationCheck implements Filter {
 
