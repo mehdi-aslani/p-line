@@ -1,8 +1,6 @@
 package ir.peeco.pline.tools;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.web.multipart.MultipartFile;
-
 import javax.xml.bind.DatatypeConverter;
 import java.io.File;
 import java.nio.file.Files;
@@ -36,10 +34,11 @@ public class GlobalsTools {
         return new Random().nextInt(999999) + "_" + System.currentTimeMillis();
     }
 
-    public static String getFileExtension(MultipartFile inFile) {
-        String fileExtension = inFile.getOriginalFilename().substring(inFile.getOriginalFilename().lastIndexOf('.'));
-        return fileExtension;
-    }
+    // public static String getFileExtension(MultipartFile inFile) {
+    // String fileExtension =
+    // inFile.getOriginalFilename().substring(inFile.getOriginalFilename().lastIndexOf('.'));
+    // return fileExtension;
+    // }
 
     public static String getBaseDir() {
         return new File("").getAbsolutePath();
