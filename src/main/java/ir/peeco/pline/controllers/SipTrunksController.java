@@ -47,7 +47,6 @@ public class SipTrunksController {
 
     @GetMapping("/index")
     public ResponseEntity<Object> index(@RequestParam(required = false) Map<String, String> params) {
-        var id = HttpSession.getAttribute("user");
         int page = 0;
         if (params.get("page") != null) {
             page = Integer.parseInt(params.get("page"));
