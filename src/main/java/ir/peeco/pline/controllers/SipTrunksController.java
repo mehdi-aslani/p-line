@@ -28,12 +28,12 @@ public class SipTrunksController {
 
     private SipTrunkRepository sipTrunkRepository;
     private SipProfilesRepository sipProfilesRepository;
-    private javax.servlet.http.HttpSession HttpSession;
+    // private javax.servlet.http.HttpSession HttpSession;
 
-    @Autowired
-    public void setHttpSession(javax.servlet.http.HttpSession httpSession) {
-        HttpSession = httpSession;
-    }
+    // @Autowired
+    // public void setHttpSession(javax.servlet.http.HttpSession httpSession) {
+    // HttpSession = httpSession;
+    // }
 
     @Autowired
     public void setSipProfilesRepository(SipProfilesRepository sipProfilesRepository) {
