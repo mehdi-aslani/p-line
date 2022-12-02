@@ -8,7 +8,6 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -22,11 +21,15 @@ public class GlobalsTools {
         return new ObjectMapper().readValue(json, HashMap.class);
     }
 
-    public static String MD5(String stringToHash) throws NoSuchAlgorithmException {
-        MessageDigest messageDigest = MessageDigest.getInstance("MD5");
-        messageDigest.update(stringToHash.getBytes());
-        byte[] digest = messageDigest.digest();
-        return DatatypeConverter.printHexBinary(digest).toLowerCase();
+    public static String MD5(String stringToHash) {
+        try {
+            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+            messageDigest.update(stringToHash.getBytes());
+            byte[] digest = messageDigest.digest();
+            return DatatypeConverter.printHexBinary(digest).toLowerCase();
+        } catch (Exception ex) {
+            return null;
+        }
     }
 
     public static String getRandomString() {

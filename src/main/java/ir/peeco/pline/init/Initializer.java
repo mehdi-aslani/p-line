@@ -7,6 +7,8 @@ import ir.peeco.pline.pline.PlineTools;
 import ir.peeco.pline.repositories.PlineUsersRepository;
 import ir.peeco.pline.repositories.SipProfileDetailsRepository;
 import ir.peeco.pline.repositories.SipProfilesRepository;
+import ir.peeco.pline.tools.GlobalsTools;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -50,8 +52,8 @@ public class Initializer {
             if (plineUsersRepository.findByUsername("admin") == null) {
                 PlineUser plineUser = new PlineUser();
                 plineUser.setFullname("Administrator");
-                plineUser.setUsername("admin");
-                plineUser.setPassword("admin");
+                plineUser.setUsername( "admin");
+                plineUser.setPassword(GlobalsTools.MD5("admin"));
                 plineUser.setEnable(true);
                 plineUser.setRoles(new String[] { "ADMIN", "CLIENT" });
                 plineUsersRepository.save(plineUser);

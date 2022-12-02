@@ -2,6 +2,8 @@ package ir.peeco.pline.controllers;
 
 import ir.peeco.pline.models.PlineUser;
 import ir.peeco.pline.repositories.PlineUsersRepository;
+import ir.peeco.pline.tools.GlobalsTools;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +41,7 @@ public class UsersController {
 
         Map<String, Object> result = new HashMap<>();
         PlineUser user = plineUsersRepository.findByUsername(form.get("username"));
-        if (user == null || user.getPassword().equals(form.get("password")) == false) {
+        if (user == null || user.getPassword().equals(GlobalsTools.MD5(form.get("password"))) == false) {
             result.put("token", null);
             result.put("has_error", true);
             result.put("error_messages", new String[] { "username or password is incorrect" });
