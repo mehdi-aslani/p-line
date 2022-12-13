@@ -3,6 +3,9 @@ package ir.peeco.pline.pline;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import lombok.Data;
+
+@Data
 public class InfoConfiguration {
 
     private String template = "";
@@ -11,44 +14,11 @@ public class InfoConfiguration {
     private boolean banner = false;
     private String description = "";
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setBanner(boolean banner) {
-        this.banner = banner;
-    }
-
-    public boolean getBanner() {
-        return banner;
-    }
-
-    public void setTemplate(String template) {
-        this.template = template;
-    }
-
-    public String getTemplate() {
-        return template;
-    }
-
-    public String getContext() {
-        return context;
-    }
-
-    public Map<String, Object> getElements() {
-        return elements;
-    }
-
-    public void setElements(Map<String, Object> elements) {
-        this.elements = elements;
-    }
-
     public void addElement(String key, Object value) {
-        elements.put(key, value);
+        if (value instanceof Boolean)
+            elements.put(key, (boolean) value ? "yes" : "no");
+        else
+            elements.put(key, value);
     }
 
     public InfoConfiguration(String context) {

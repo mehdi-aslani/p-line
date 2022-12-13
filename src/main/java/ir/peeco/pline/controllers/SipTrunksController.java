@@ -22,7 +22,7 @@ import ir.peeco.pline.repositories.SipProfilesRepository;
 import ir.peeco.pline.repositories.SipTrunkRepository;
 
 @RestController
-@CrossOrigin(value = "http://localhost:3000", maxAge = 300)
+@CrossOrigin(value = "*", maxAge = 300)
 @RequestMapping("/sip-trunks")
 public class SipTrunksController {
 
@@ -47,6 +47,7 @@ public class SipTrunksController {
 
     @GetMapping("/index")
     public ResponseEntity<Object> index(@RequestParam(required = false) Map<String, String> params) {
+        // var id = HttpSession.getAttribute("user");
         int page = 0;
         if (params.get("page") != null) {
             page = Integer.parseInt(params.get("page"));

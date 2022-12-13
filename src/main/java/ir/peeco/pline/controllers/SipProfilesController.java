@@ -24,7 +24,7 @@ import ir.peeco.pline.repositories.SipProfileDetailsRepository;
 import ir.peeco.pline.repositories.SipProfilesRepository;
 
 @RestController
-@CrossOrigin(value = "http://localhost:3000", maxAge = 300)
+@CrossOrigin(value = "*", maxAge = 300)
 @RequestMapping("/sip-profiles")
 public class SipProfilesController {
 

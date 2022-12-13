@@ -1,6 +1,7 @@
 package ir.peeco.pline.controllers;
 
 import ir.peeco.pline.models.PlineUser;
+import ir.peeco.pline.pline.ApiResult;
 import ir.peeco.pline.repositories.PlineUsersRepository;
 import ir.peeco.pline.tools.GlobalsTools;
 
@@ -39,12 +40,11 @@ public class UsersController {
     @PostMapping("/login")
     public ResponseEntity<?> login(HttpServletRequest req, @RequestBody Map<String, String> form) {
 
-        Map<String, Object> result = new HashMap<>();
+        ApiResult result = new ApiResult();
         PlineUser user = plineUsersRepository.findByUsername(form.get("username"));
         if (user == null || user.getPassword().equals(GlobalsTools.MD5(form.get("password"))) == false) {
-            result.put("token", null);
-            result.put("has_error", true);
-            result.put("error_messages", new String[] { "username or password is incorrect" });
+            result.setHasError(true);
+            result.addMessage("username or password is incorrect");
             return ResponseEntity.status(HttpServletResponse.SC_OK).body(result);
         }
 
@@ -57,11 +57,13 @@ public class UsersController {
                 .compact();
         user.setToken(token);
         plineUsersRepository.save(user);
-        result.put("token", token);
-        result.put("username", form.get("username"));
-        result.put("uid", user.getId());
-        result.put("isAuth", true);
-        result.put("has_error", false);
-        return ResponseEntity.ok(result);
+        Map<String, Object> resultLogin = new HashMap<>();
+        resultLogin.put("token", token);
+        resultLogin.put("username", form.get("username"));
+        resultLogin.put("fullname", user.getFullname());
+        resultLogin.put("uid", user.getId().toString());
+        resultLogin.put("isAuth", true);
+        resultLogin.put("hasError", false);
+        return ResponseEntity.ok(resultLogin);
     }
 }

@@ -10,12 +10,15 @@ import ir.peeco.pline.repositories.SipProfilesRepository;
 import ir.peeco.pline.tools.GlobalsTools;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class Initializer {
+    @Value("${spring.banner.location}")
+    private String banner;
 
     private PlineUsersRepository plineUsersRepository;
     private SipProfilesRepository sipProfilesRepository;
@@ -52,7 +55,7 @@ public class Initializer {
             if (plineUsersRepository.findByUsername("admin") == null) {
                 PlineUser plineUser = new PlineUser();
                 plineUser.setFullname("Administrator");
-                plineUser.setUsername( "admin");
+                plineUser.setUsername("admin");
                 plineUser.setPassword(GlobalsTools.MD5("admin"));
                 plineUser.setEnable(true);
                 plineUser.setRoles(new String[] { "ADMIN", "CLIENT" });
@@ -100,16 +103,16 @@ public class Initializer {
                     profileDetailsRepository.save(d);
                 }
             }
-
-            System.out.println("\n" +
-                    "\t\t\t***********************************************\n" +
-                    "\t\t\t# ██████╗       ██╗     ██╗███╗   ██╗███████╗ #\n" +
-                    "\t\t\t# ██╔══██╗      ██║     ██║████╗  ██║██╔════╝ #\n" +
-                    "\t\t\t# ██████╔╝█████╗██║     ██║██╔██╗ ██║█████╗   #\n" +
-                    "\t\t\t# ██╔═══╝ ╚════╝██║     ██║██║╚██╗██║██╔══╝   #\n" +
-                    "\t\t\t# ██║           ███████╗██║██║ ╚████║███████╗ #\n" +
-                    "\t\t\t# ╚═╝           ╚══════╝╚═╝╚═╝  ╚═══╝╚══════╝ #\n" +
-                    "\t\t\t***********************************************\n");
+            if (banner == null || banner.trim().isEmpty())
+                System.out.println("\n" +
+                        "\t\t\t***********************************************\n" +
+                        "\t\t\t# ██████╗       ██╗     ██╗███╗   ██╗███████╗ #\n" +
+                        "\t\t\t# ██╔══██╗      ██║     ██║████╗  ██║██╔════╝ #\n" +
+                        "\t\t\t# ██████╔╝█████╗██║     ██║██╔██╗ ██║█████╗   #\n" +
+                        "\t\t\t# ██╔═══╝ ╚════╝██║     ██║██║╚██╗██║██╔══╝   #\n" +
+                        "\t\t\t# ██║           ███████╗██║██║ ╚████║███████╗ #\n" +
+                        "\t\t\t# ╚═╝           ╚══════╝╚═╝╚═╝  ╚═══╝╚══════╝ #\n" +
+                        "\t\t\t***********************************************\n");
         };
     };
 

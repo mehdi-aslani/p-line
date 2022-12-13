@@ -1,8 +1,7 @@
 package ir.peeco.pline.pline;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -11,8 +10,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 @Component
@@ -50,9 +50,8 @@ public class PlineTools {
                 + ";##############################################\n";
     }
 
-    @Autowired
     public PlineTools() {
-        logger = LoggerFactory.getLogger("P-Line-PBX-Ver-" + this.version);
+        this.logger = LogManager.getLogger(PlineTools.class);
     }
 
     public String getConfigPath() {
@@ -71,8 +70,14 @@ public class PlineTools {
         logger.info(message);
     }
 
-    public String ExecLinuxCli(String command, boolean wantResult) {
+    public String ExecLinuxCli(String command, List<String> parameters, boolean wantResult) {
+        command = command.trim() + " ";
+        for (String x : parameters) {
+            command += x.trim() + " ";
+        }
+
         try {
+            this.plineLogger("Exec: " + command);
             Process p = Runtime.getRuntime().exec(command);
             if (wantResult) {
                 BufferedReader buf = new BufferedReader(new InputStreamReader(p.getInputStream()));
@@ -92,8 +97,9 @@ public class PlineTools {
     }
 
     public String execCoreCommand(String command) {
+
         this.plineLogger("Exec Core Command: " + command);
-        String result = this.ExecLinuxCli("/usr/sbin/" + this.core + " -x '" + command + "'", true);
+        String result = this.ExecLinuxCli("/usr/sbin/" + this.core, Arrays.asList(" -x '" + command + "'"), true);
         this.plineLogger("Exec Core Command Result: " + result);
         return result;
     }
@@ -129,11 +135,11 @@ public class PlineTools {
         }
     }
 
-    public boolean writeinfoFile(String folder, String filename, ArrayList<InfoConfiguration> iniConfigurations) {
+    public boolean writeinfoFile(String folder, String filename, List<InfoConfiguration> iniConfigurations) {
         try {
             this.plineLogger("Start write info file: " + filename);
-            if (!filename.endsWith(".info")) {
-                filename += ".info";
+            if (!filename.endsWith(".conf")) {
+                filename += ".conf";
             }
 
             if (!folder.endsWith("/")) {
@@ -159,7 +165,7 @@ public class PlineTools {
 
             boolean bannerSetInFirst = false;
             for (InfoConfiguration ic : iniConfigurations) {
-                if (ic.getBanner() && bannerSetInFirst == false) {
+                if (ic.isBanner() && bannerSetInFirst == false) {
                     fileWriter.println(this.getBanner());
                     bannerSetInFirst = true;
                 }

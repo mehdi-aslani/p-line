@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,11 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ir.peeco.pline.models.TblSipGlobals;
 import ir.peeco.pline.models.TblSipSystems;
+import ir.peeco.pline.pline.ApiResult;
 import ir.peeco.pline.repositories.SipSystemsRepository;
 import ir.peeco.pline.repositories.SipGlobalsRepository;
 
 @RestController
-@CrossOrigin(value = "http://localhost:3000", maxAge = 3600)
+@CrossOrigin(value = "*", maxAge = 3600)
 @RequestMapping("/settings")
 public class SettingsController {
 
@@ -42,18 +44,19 @@ public class SettingsController {
         if (sip.size() == 0)
             return new TblSipGlobals();
         return sip.get(0);
-
     }
 
     @PostMapping("/save-sip-globals")
-    public Map<String, Object> saveSipGlobals(@Valid @RequestBody TblSipGlobals tblSipGlobals) {
-        Map<String, Object> result = new HashMap<>();
+    public ResponseEntity<ApiResult> saveSipGlobals(@Valid @RequestBody TblSipGlobals tblSipGlobals) {
+        ApiResult result = new ApiResult();
         try {
             sipGlobalsRepository.save(tblSipGlobals);
+            result.setHasError(false);
         } catch (Exception e) {
-
+            result.setHasError(true);
+            result.addMessage(e.getMessage());
         }
-        return result;
+        return ResponseEntity.ok(result);
     }
 
     @GetMapping("/system-sip-settings")
