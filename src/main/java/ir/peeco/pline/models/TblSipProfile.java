@@ -13,14 +13,16 @@ public class TblSipProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
     @NotEmpty(message = "'Name' cannot be Empty")
     @Column(unique = true, nullable = false)
-    public String name;
+    private String name;
 
     @Column(length = 1024)
     @Size(min = 0, max = 1024, message = "'Description' length must be less 1024 characters")
-    public String description;
+    private String description;
+
+    private boolean enable = true;
 
 }

@@ -3,17 +3,25 @@ package ir.peeco.pline.init;
 import ir.peeco.pline.models.TblSipProfile;
 import ir.peeco.pline.models.TblSipProfileDetails;
 import ir.peeco.pline.models.PlineUser;
+import ir.peeco.pline.models.TblSipParameter;
 import ir.peeco.pline.pline.PlineTools;
 import ir.peeco.pline.repositories.PlineUsersRepository;
+import ir.peeco.pline.repositories.SipParameterRepository;
 import ir.peeco.pline.repositories.SipProfileDetailsRepository;
 import ir.peeco.pline.repositories.SipProfilesRepository;
 import ir.peeco.pline.tools.GlobalsTools;
 
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 
 @Configuration
 public class Initializer {
@@ -46,10 +54,39 @@ public class Initializer {
         this.plineTools = plineTools;
     }
 
+    private SipParameterRepository sipParameterRepository;
+
+    @Autowired
+    public void setSipParameterRepository(SipParameterRepository sipParameterRepository) {
+        this.sipParameterRepository = sipParameterRepository;
+    }
+
     @Bean
     public CommandLineRunner init() {
         return args -> {
 
+            ArrayList<TblSipParameter> list = new ArrayList<>();
+            var data = (HashMap<String, Object>) GlobalsTools.getSipParameters().get("sip_profiles");
+            data.forEach((k, v) -> {
+                for (var string : ((ArrayList) v)) {
+                    TblSipParameter p = new TblSipParameter();
+                    p.setGroup(k);
+                    var f = ((ArrayList) string);
+                    p.setId(null);
+                    p.setName(f.get(0).toString());
+                    p.setType(f.get(1).toString());
+                    p.setOptions(f.get(2) == null ? "" : f.get(2).toString());
+                    p.setDefaultValue(f.get(3).toString());
+                    p.setDescription(f.get(4).toString());
+                    list.add(p);
+                }
+            });
+
+            ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+            String json = ow.writeValueAsString(list);
+            PrintWriter p = new PrintWriter("./pjsip_parameters.json");
+            p.println(json);
+            p.close();
             plineTools.getRandomString(10);
 
             if (plineUsersRepository.findByUsername("admin") == null) {
@@ -64,13 +101,15 @@ public class Initializer {
 
             if (sipProfilesRepository.count() == 0) {
                 TblSipProfile profileU = new TblSipProfile();
-                profileU.name = "Sip User Profile";
-                profileU.description = ".:: Default Sip User Profile ::.";
+                profileU.setName("Sip User Profile");
+                profileU.setDescription(".:: Default Sip User Profile ::.");
+                profileU.setEnable(true);
                 sipProfilesRepository.save(profileU);
 
                 TblSipProfile profileT = new TblSipProfile();
-                profileT.name = "Sip Trunks Profile";
-                profileT.description = ".:: Default Sip Trunk Profile ::.";
+                profileT.setName("Sip Trunks Profile");
+                profileT.setDescription(".:: Default Sip Trunk Profile ::.");
+                profileT.setEnable(true);
                 sipProfilesRepository.save(profileT);
 
                 Object[][] def = new Object[][] {

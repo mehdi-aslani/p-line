@@ -45,7 +45,7 @@ public class SipProfilesController {
     public Map<String, Object> saveProfile(@Valid @RequestBody TblSipProfile tblSipProfile) {
         Map<String, Object> result = new HashMap<String, Object>();
         ArrayList<String> errors = new ArrayList<>();
-        if (sipProfilesRepository.existsByName(tblSipProfile.name)) {
+        if (sipProfilesRepository.existsByName(tblSipProfile.getName())) {
             errors.add("The name is duplicate");
         } else
             this.sipProfilesRepository.save(tblSipProfile);

@@ -17,13 +17,13 @@ public class TblSipProfileDetails {
     @JoinColumn(name = "sip_profile_id")
     public TblSipProfile sipProfile;
 
-    @Column(name = "_type", nullable = false)
+    @Column(name = "sip_type", nullable = false)
     public String type;
 
-    @Column(name = "_key", nullable = false)
+    @Column(name = "sip_key", nullable = false)
     public String key;
 
-    @Column(name = "_value", nullable = false)
+    @Column(name = "sip_value", nullable = false)
     public String value;
 
 }

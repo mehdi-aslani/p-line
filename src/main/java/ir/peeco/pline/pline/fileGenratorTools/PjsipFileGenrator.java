@@ -142,12 +142,12 @@ public class PjsipFileGenrator {
 
       for (String pjSip : elementPjSip) {
 
-        InfoConfiguration configuration = new InfoConfiguration(pjSip + "-" + p.id);
+        InfoConfiguration configuration = new InfoConfiguration(pjSip + "-" + p.getId());
         configuration.setBanner(true);
 
         if (pjSip == "transport") {
           configuration.setDescription(
-              "Profile Name: " + p.name + "\n" + "Profile Description: " + p.description);
+              "Profile Name: " + p.getName() + "\n" + "Profile Description: " + p.getDescription());
         } else {
           configuration.setTemplate("!");
         }
@@ -156,7 +156,7 @@ public class PjsipFileGenrator {
           configuration.addElement("disallow", "all");
         }
 
-        sipProfileDetailsRepository.getBySipProfileIdAndType(p.id, pjSip).forEach(d -> {
+        sipProfileDetailsRepository.getBySipProfileIdAndType(p.getId(), pjSip).forEach(d -> {
           String value = d.value;
           if (value.startsWith("[") && value.endsWith("]")) {
             value = value.replace("[", "").replace("]", "").replace("\"", "").replace(" ", "");
@@ -167,7 +167,7 @@ public class PjsipFileGenrator {
 
       }
 
-      plineTools.writeinfoFile("sip-profiles", "sip-profile-" + p.id, infoConfigurations);
+      plineTools.writeinfoFile("sip-profiles", "sip-profile-" + p.getId(), infoConfigurations);
     });
   }
 

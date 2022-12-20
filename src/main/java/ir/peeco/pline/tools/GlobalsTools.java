@@ -1,6 +1,7 @@
 package ir.peeco.pline.tools;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ir.peeco.pline.models.TblSipParameter;
 import javax.xml.bind.DatatypeConverter;
 import java.io.File;
 import java.nio.file.Files;
@@ -17,6 +18,13 @@ public class GlobalsTools {
         byte[] buff = Files.readAllBytes(Path.of(GlobalsTools.getBaseDir() + "/SipParameters.json"));
         String json = new String(buff);
         return new ObjectMapper().readValue(json, HashMap.class);
+    }
+
+    // @SuppressWarnings("unchecked")
+    public static TblSipParameter[] getpjSipParameters() throws Exception {
+        byte[] buff = Files.readAllBytes(Path.of(GlobalsTools.getBaseDir() + "/pjsip_parameters.json"));
+        String json = new String(buff);
+        return new ObjectMapper().readValue(json, TblSipParameter[].class);
     }
 
     public static String MD5(String stringToHash) {

@@ -66,7 +66,7 @@ public class SipProfileDetailsController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<Object> getData(@RequestParam(name = "id", required = true) Long id) {
+    public ResponseEntity<?> getData(@RequestParam(name = "id", required = true) Long id) {
         var details = sipProfileDetailsRepository.getBySipProfileId(id);
         Map<String, Object> endpoint = new HashMap<String, Object>();
         Map<String, Object> auth = new HashMap<String, Object>();
