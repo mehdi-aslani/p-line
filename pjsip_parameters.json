@@ -1,1838 +1,1633 @@
-[
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "100rel",
-    "type": "Custom",
-    "options": "{no=no, required=required, yes=yes}",
-    "defaultValue": "yes",
-    "description": "Allow support for RFC3262 provisional ACK tags"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "accept_multiple_sdp_answers",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Accept multiple SDP answers on non-100rel responses"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "accountcode",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "An accountcode to set automatically on any channels created for this endpoint."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "acl",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "List of IP ACL section names in acl.conf"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "aggregate_mwi",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "all",
-    "description": "Condense MWI notifications into a single NOTIFY."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "allow",
-    "type": "Custom",
-    "options": "{ulaw=u-law, alaw=a-law, gsm=gsm, h264=h264, h263=h263}",
-    "defaultValue": "ulaw",
-    "description": "Media Codec(s) to allow"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "allow_overlap",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "yes",
-    "description": "Enable RFC3578 overlap dialing support."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "allow_subscribe",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "yes",
-    "description": "Determines if endpoint is allowed to initiate subscriptions with p-line."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "allow_transfer",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "yes",
-    "description": "Determines whether SIP REFER transfers are allowed for this endpoint"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "aors",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "AoR(s) to be used with the endpoint"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "asymmetric_rtp_codec",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Allow the sending and receiving RTP codec to differ"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "auth",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Authentication Object(s) associated with the endpoint"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "bind_rtp_to_media_address",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Bind the RTP instance to the media_address"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "bundle",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Enable RTP bundling"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "call_group",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "The numeric pickup groups for a channel."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "callerid",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "CallerID information for the endpoint"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "callerid_privacy",
-    "type": "Custom",
-    "options": "{allowed_not_screened=allowed_not_screened, allowed_passed_screen=allowed_passed_screen, allowed_failed_screen=allowed_failed_screen, allowed=allowed, prohib_not_screened=prohib_not_screened, prohib_passed_screen=prohib_passed_screen, prohib_failed_screen=prohib_failed_screen, prohib=prohib, unavailable=unavailable}",
-    "defaultValue": "allowed_not_screened",
-    "description": "Default privacy level"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "callerid_tag",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Internal id_tag for the endpoint"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "connected_line_method",
-    "type": "Custom",
-    "options": "{invite=invite - When set to invite, check the remote's Allow header and if UPDATE is allowed, send UPDATE instead of INVITE to avoid SDP renegotiation. If UPDATE is not Allowed, send INVITE, reinvite=Alias for the invite value, update=update - If set to update, send UPDATE regardless of what the remote Allows}",
-    "defaultValue": "invite",
-    "description": "Connected line method type"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "contact_acl",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "List of Contact ACL section names in acl.conf"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "contact_deny",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "List of Contact header addresses to deny"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "contact_permit",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "List of Contact header addresses to permit"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "contact_user",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Force the user on the outgoing Contact header to this value."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "context",
-    "type": "String",
-    "options": "",
-    "defaultValue": "default",
-    "description": "Dialplan context for inbound sessions"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "cos_audio",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "0",
-    "description": "Priority for audio streams"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "cos_video",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "0",
-    "description": "Priority for video streams"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "deny",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "List of IP addresses to deny access from"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "device_state_busy_at",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "0",
-    "description": "The number of in-use channels which will cause busy to be returned as device state"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "direct_media",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "yes",
-    "description": "Determines whether media may flow directly between endpoints."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "direct_media_glare_mitigation",
-    "type": "Custom",
-    "options": "{none=none, outgoing=outgoing, incoming=incoming}",
-    "defaultValue": "none",
-    "description": "Mitigation of direct media (re)INVITE glare"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "direct_media_method",
-    "type": "Custom",
-    "options": "{invite=invite, reinvite=reinvite - Alias for the invite value, update=update}",
-    "defaultValue": "invite",
-    "description": "Direct Media method type"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "disable_direct_media_on_nat",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Disable direct media session refreshes when NAT obstructs the media session"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "dtls_auto_generate_cert",
-    "type": "String",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Whether or not to automatically generate an ephemeral X.509 certificate"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "dtls_ca_file",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Path to certificate authority certificate"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "dtls_ca_path",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Path to a directory containing certificate authority certificates"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "dtls_cert_file",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Path to certificate file to present to peer"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "dtls_cipher",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Cipher to use for DTLS negotiation"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "dtls_fingerprint",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Type of hash to use for the DTLS fingerprint in the SDP."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "dtls_private_key",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Path to private key for certificate file"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "dtls_rekey",
-    "type": "String",
-    "options": "",
-    "defaultValue": "0",
-    "description": "Interval at which to renegotiate the TLS session and rekey the SRTP session"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "dtls_setup",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Whether we are willing to accept connections, connect to the other party, or both."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "dtls_verify",
-    "type": "String",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Verify that the provided peer certificate is valid"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "dtmf_mode",
-    "type": "Custom",
-    "options": "{rfc4733=rfc4733 - DTMF is sent out of band of the main audio stream. This supercedes the older RFC-2833 used within the older chan_sip, inband=inband - DTMF is sent as part of audio stream, info=info - DTMF is sent as SIP INFO packets, auto=auto - DTMF is sent as RFC 4733 if the other side supports it or as INBAND if not, auto_info=auto_info - DTMF is sent as RFC 4733 if the other side supports it or as SIP INFO if not}",
-    "defaultValue": "rfc4733",
-    "description": "DTMF mode"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "fax_detect",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Whether CNG tone detection is enabled"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "fax_detect_timeout",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "0",
-    "description": "How long into a call before fax_detect is disabled for the call"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "follow_early_media_fork",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "yes",
-    "description": "Follow SDP forked media when To tag is different"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "force_avp",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Determines whether res_pjsip will use and enforce usage of AVP, regardless of the RTP profile in use for this endpoint."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "force_rport",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "yes",
-    "description": "Force use of return port"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "from_domain",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Domain to user in From header for requests to this endpoint."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "from_user",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Username to use in From header for requests to this endpoint."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "g726_non_standard",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Force g.726 to use AAL2 packing order when negotiating g.726 audio"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "ice_support",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Enable the ICE mechanism to help traverse NAT"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "identify_by",
-    "type": "String",
-    "options": "",
-    "defaultValue": "username,ip",
-    "description": "Way(s) for the endpoint to be identified"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "inband_progress",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Determines whether chan_pjsip will indicate ringing using inband progress."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "incoming_mwi_mailbox",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Mailbox name to use when incoming MWI NOTIFYs are received"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "language",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Set the default language to use for channels created for this endpoint."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "mailboxes",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "NOTIFY the endpoint when state changes for any of the specified mailboxes"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "max_audio_streams",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "1",
-    "description": "The maximum number of allowed audio streams for the endpoint"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "max_video_streams",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "1",
-    "description": "The maximum number of allowed video streams for the endpoint"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "media_address",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "IP address used in SDP for media handling"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "media_encryption",
-    "type": "String",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Determines whether res_pjsip will use and enforce usage of media encryption for this endpoint."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "media_encryption_optimistic",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Determines whether encryption should be used if possible but does not terminate the session if not achieved."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "media_use_received_transport",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Determines whether res_pjsip will use the media transport received in the offer SDP in the corresponding answer SDP."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "message_context",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Context to route incoming MESSAGE requests to."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "moh_passthrough",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Determines whether hold and unhold will be passed through using re-INVITEs with recvonly and sendrecv to the remote side"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "moh_suggest",
-    "type": "String",
-    "options": "",
-    "defaultValue": "default",
-    "description": "Default Music On Hold class"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "mwi_from_user",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Username to use in From header for unsolicited MWI NOTIFYs to this endpoint."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "mwi_subscribe_replaces_unsolicited",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "An MWI subscribe will replace sending unsolicited NOTIFYs"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "named_call_group",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "The named pickup groups for a channel."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "named_pickup_group",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "The named pickup groups that a channel can pickup."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "notify_early_inuse_ringing",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Whether to notifies dialog-info 'early' on InUse&Ringing state"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "one_touch_recording",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Determines whether one-touch recording is allowed for this endpoint."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "outbound_auth",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Authentication object(s) used for outbound requests"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "outbound_proxy",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Full SIP URI of the outbound proxy used to send requests"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "permit",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "List of IP addresses to permit access from"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "pickup_group",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "The numeric pickup groups that a channel can pickup."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "preferred_codec_only",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Respond to a SIP invite with the single most preferred codec rather than advertising all joint codec capabilities. This limits the other side's codec choice to exactly what we prefer."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "record_off_feature",
-    "type": "String",
-    "options": "",
-    "defaultValue": "automixmon",
-    "description": "The feature to enact when one-touch recording is turned off."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "record_on_feature",
-    "type": "String",
-    "options": "",
-    "defaultValue": "automixmon",
-    "description": "The feature to enact when one-touch recording is turned on."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "redirect_method",
-    "type": "Custom",
-    "options": "{user=user, uri_core=uri_core, uri_pjsip=uri_pjsip}",
-    "defaultValue": "user",
-    "description": "How redirects received from an endpoint are handled"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "refer_blind_progress",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "yes",
-    "description": "Whether to notifies all the progress details on blind transfer"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "rewrite_contact",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Allow Contact header to be rewritten with the source IP address-port"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "rpid_immediate",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Immediately send connected line updates on unanswered incoming calls."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "rtcp_mux",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Enable RFC 5761 RTCP multiplexing on the RTP port"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "rtp_engine",
-    "type": "String",
-    "options": "",
-    "defaultValue": "p-line",
-    "description": "Name of the RTP engine to use for channels created for this endpoint"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "rtp_ipv6",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Allow use of IPv6 for RTP traffic"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "rtp_keepalive",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "0",
-    "description": "Number of seconds between RTP comfort noise keepalive packets."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "rtp_symmetric",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Enforce that RTP must be symmetric"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "rtp_timeout",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "0",
-    "description": "Maximum number of seconds without receiving RTP (while off hold) before terminating call."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "rtp_timeout_hold",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "0",
-    "description": "Maximum number of seconds without receiving RTP (while on hold) before terminating call."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "sdp_owner",
-    "type": "String",
-    "options": "",
-    "defaultValue": "p-line-sdp",
-    "description": "String placed as the username portion of an SDP origin (o=) line."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "sdp_session",
-    "type": "String",
-    "options": "",
-    "defaultValue": "p-line",
-    "description": "String used for the SDP session (s=) line."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "send_diversion",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "yes",
-    "description": "Send the Diversion header, conveying the diversion information to the called user agent"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "send_pai",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Send the P-Asserted-Identity header"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "send_rpid",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Send the Remote-Party-ID header"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "set_var",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Variable set on a channel involving the endpoint."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "srtp_tag_32",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Determines whether 32 byte tags should be used instead of 80 byte tags."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "sub_min_expiry",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "0",
-    "description": "The minimum allowed expiry time for subscriptions initiated by the endpoint."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "subscribe_context",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Context for incoming MESSAGE requests."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "suppress_q850_reason_headers",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Suppress Q.850 Reason headers for this endpoint"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "t38_udptl",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Whether T.38 UDPTL support is enabled or not"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "t38_udptl_ec",
-    "type": "String",
-    "options": "",
-    "defaultValue": "none",
-    "description": "T.38 UDPTL error correction method"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "t38_udptl_ipv6",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Whether IPv6 is used for UDPTL Sessions"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "t38_udptl_maxdatagram",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "0",
-    "description": "T.38 UDPTL maximum datagram size"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "t38_udptl_nat",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Whether NAT support is enabled on UDPTL sessions"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "timers",
-    "type": "Custom",
-    "options": "{no=no, yes=yes, required=required, always=always, forced=forced - Alias of always}",
-    "defaultValue": "yes",
-    "description": "Session timers for SIP packets"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "timers_min_se",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "90",
-    "description": "Minimum session timers expiration period"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "timers_sess_expires",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "1800",
-    "description": "Maximum session timer expiration period"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "tone_zone",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Set which country's indications to use for channels created for this endpoint."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "tos_audio",
-    "type": "String",
-    "options": "",
-    "defaultValue": "0",
-    "description": "DSCP TOS bits for audio streams"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "tos_video",
-    "type": "String",
-    "options": "",
-    "defaultValue": "0",
-    "description": "DSCP TOS bits for video streams"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "transport",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Explicit transport configuration to use"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "trust_id_inbound",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Accept identification information received from this endpoint"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "trust_id_outbound",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Send private identification details to the endpoint."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "use_avpf",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Determines whether res_pjsip will use and enforce usage of AVPF for this endpoint."
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "use_ptime",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Use Endpoint's requested packetization interval"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "user_eq_phone",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Determines whether a user=phone parameter is placed into the request URI if the user is determined to be a phone number"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "voicemail_extension",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "The voicemail extension to send in the NOTIFY Message-Account header"
-  },
-  {
-    "id": null,
-    "group": "endpoint",
-    "name": "webrtc",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Defaults and enables some options that are relevant to WebRTC"
-  },
-  {
-    "id": null,
-    "group": "auth",
-    "name": "auth_type",
-    "type": "Custom",
-    "options": "{md5=md5, userpass=userpass, google_oauth=google_oauth}",
-    "defaultValue": "userpass",
-    "description": "Authentication type"
-  },
-  {
-    "id": null,
-    "group": "auth",
-    "name": "nonce_lifetime",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "32",
-    "description": "Lifetime of a nonce associated with this authentication config."
-  },
-  {
-    "id": null,
-    "group": "auth",
-    "name": "md5_cred",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "MD5 Hash used for authentication."
-  },
-  {
-    "id": null,
-    "group": "auth",
-    "name": "password",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Plain text password used for authentication."
-  },
-  {
-    "id": null,
-    "group": "auth",
-    "name": "realm",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "SIP realm for endpoint"
-  },
-  {
-    "id": null,
-    "group": "auth",
-    "name": "username",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Username to use for account"
-  },
-  {
-    "id": null,
-    "group": "transport",
-    "name": "bind",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "IP Address and optional port to bind to for this transport"
-  },
-  {
-    "id": null,
-    "group": "transport",
-    "name": "ca_list_file",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "File containing a list of certificates to read (TLS ONLY, not WSS)"
-  },
-  {
-    "id": null,
-    "group": "transport",
-    "name": "ca_list_path",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Path to directory containing a list of certificates to read (TLS ONLY, not WSS)"
-  },
-  {
-    "id": null,
-    "group": "transport",
-    "name": "cert_file",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Certificate file for endpoint (TLS ONLY, not WSS)"
-  },
-  {
-    "id": null,
-    "group": "transport",
-    "name": "cipher",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Preferred cryptography cipher names (TLS ONLY, not WSS)"
-  },
-  {
-    "id": null,
-    "group": "transport",
-    "name": "domain",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Domain the transport comes from"
-  },
-  {
-    "id": null,
-    "group": "transport",
-    "name": "external_media_address",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "External IP address to use in RTP handling"
-  },
-  {
-    "id": null,
-    "group": "transport",
-    "name": "external_signaling_address",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "External address for SIP signalling"
-  },
-  {
-    "id": null,
-    "group": "transport",
-    "name": "external_signaling_port",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "0",
-    "description": "External port for SIP signalling"
-  },
-  {
-    "id": null,
-    "group": "transport",
-    "name": "method",
-    "type": "Custom",
-    "options": "{default=default - The default as defined by PJSIP. This is currently TLSv1, but may change with future releases, unspecified=unspecified - This option is equivalent to setting 'default', tlsv1=tlsv1, tlsv1_1=tlsv1_1, tlsv1_2=tlsv1_2, sslv2=sslv2, sslv3=sslv3, sslv23=sslv23}",
-    "defaultValue": "",
-    "description": "Method of SSL transport (TLS ONLY, not WSS)"
-  },
-  {
-    "id": null,
-    "group": "transport",
-    "name": "local_net",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Network to consider local (used for NAT purposes)."
-  },
-  {
-    "id": null,
-    "group": "transport",
-    "name": "password",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Password required for transport"
-  },
-  {
-    "id": null,
-    "group": "transport",
-    "name": "priv_key_file",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Private key file (TLS ONLY, not WSS)"
-  },
-  {
-    "id": null,
-    "group": "transport",
-    "name": "protocol",
-    "type": "Custom",
-    "options": "{udp=udp, tcp=tcp, tls=tls, ws=ws, wss=wss}",
-    "defaultValue": "udp",
-    "description": "Protocol to use for SIP traffic"
-  },
-  {
-    "id": null,
-    "group": "transport",
-    "name": "require_client_cert",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Require client certificate (TLS ONLY, not WSS)"
-  },
-  {
-    "id": null,
-    "group": "transport",
-    "name": "verify_client",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Require verification of client certificate (TLS ONLY, not WSS)"
-  },
-  {
-    "id": null,
-    "group": "transport",
-    "name": "verify_server",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Require verification of server certificate (TLS ONLY, not WSS)"
-  },
-  {
-    "id": null,
-    "group": "transport",
-    "name": "tos",
-    "type": "String",
-    "options": "",
-    "defaultValue": "0",
-    "description": "Enable TOS for the signalling sent over this transport"
-  },
-  {
-    "id": null,
-    "group": "transport",
-    "name": "cos",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "0",
-    "description": "Enable COS for the signalling sent over this transport"
-  },
-  {
-    "id": null,
-    "group": "transport",
-    "name": "websocket_write_timeout",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "100",
-    "description": "The timeout (in milliseconds) to set on WebSocket connections."
-  },
-  {
-    "id": null,
-    "group": "transport",
-    "name": "allow_reload",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Allow this transport to be reloaded."
-  },
-  {
-    "id": null,
-    "group": "transport",
-    "name": "symmetric_transport",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Use the same transport for outgoing requests as incoming ones."
-  },
-  {
-    "id": null,
-    "group": "contact",
-    "name": "uri",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "SIP URI to contact peer"
-  },
-  {
-    "id": null,
-    "group": "contact",
-    "name": "expiration_time",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Time to keep alive a contact"
-  },
-  {
-    "id": null,
-    "group": "contact",
-    "name": "qualify_frequency",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "0",
-    "description": "Interval at which to qualify a contact"
-  },
-  {
-    "id": null,
-    "group": "contact",
-    "name": "qualify_timeout",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "3",
-    "description": "Timeout for qualify"
-  },
-  {
-    "id": null,
-    "group": "contact",
-    "name": "authenticate_qualify",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Authenticates a qualify challenge response if needed"
-  },
-  {
-    "id": null,
-    "group": "contact",
-    "name": "outbound_proxy",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Outbound proxy used when sending OPTIONS request"
-  },
-  {
-    "id": null,
-    "group": "contact",
-    "name": "path",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Stored Path vector for use in Route headers on outgoing requests."
-  },
-  {
-    "id": null,
-    "group": "contact",
-    "name": "user_agent",
-    "type": "String",
-    "options": "",
-    "defaultValue": "p-line pbx version 2.0.01",
-    "description": "User-Agent header from registration."
-  },
-  {
-    "id": null,
-    "group": "contact",
-    "name": "endpoint",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Endpoint name"
-  },
-  {
-    "id": null,
-    "group": "contact",
-    "name": "reg_server",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "p-line Server name"
-  },
-  {
-    "id": null,
-    "group": "contact",
-    "name": "via_addr",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "IP-address of the last Via header from registration."
-  },
-  {
-    "id": null,
-    "group": "contact",
-    "name": "via_port",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "0",
-    "description": "IP-port of the last Via header from registration."
-  },
-  {
-    "id": null,
-    "group": "contact",
-    "name": "call_id",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Call-ID header from registration."
-  },
-  {
-    "id": null,
-    "group": "contact",
-    "name": "prune_on_boot",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "A contact that cannot survive a restart/boot."
-  },
-  {
-    "id": null,
-    "group": "aor",
-    "name": "contact",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Permanent contacts assigned to AoR"
-  },
-  {
-    "id": null,
-    "group": "aor",
-    "name": "default_expiration",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "3600",
-    "description": "Default expiration time in seconds for contacts that are dynamically bound to an AoR."
-  },
-  {
-    "id": null,
-    "group": "aor",
-    "name": "mailboxes",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Allow subscriptions for the specified mailbox(es)"
-  },
-  {
-    "id": null,
-    "group": "aor",
-    "name": "voicemail_extension",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "The voicemail extension to send in the NOTIFY Message-Account header"
-  },
-  {
-    "id": null,
-    "group": "aor",
-    "name": "maximum_expiration",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "7200",
-    "description": "Maximum time to keep an AoR"
-  },
-  {
-    "id": null,
-    "group": "aor",
-    "name": "max_contacts",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "0",
-    "description": "Maximum number of contacts that can bind to an AoR"
-  },
-  {
-    "id": null,
-    "group": "aor",
-    "name": "minimum_expiration",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "60",
-    "description": "Minimum keep alive time for an AoR"
-  },
-  {
-    "id": null,
-    "group": "aor",
-    "name": "remove_existing",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Determines whether new contacts replace existing ones."
-  },
-  {
-    "id": null,
-    "group": "aor",
-    "name": "qualify_frequency",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "0",
-    "description": "Interval at which to qualify an AoR"
-  },
-  {
-    "id": null,
-    "group": "aor",
-    "name": "qualify_timeout",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "3",
-    "description": "Timeout for qualify"
-  },
-  {
-    "id": null,
-    "group": "aor",
-    "name": "authenticate_qualify",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Authenticates a qualify challenge response if needed"
-  },
-  {
-    "id": null,
-    "group": "aor",
-    "name": "outbound_proxy",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "Outbound proxy used when sending OPTIONS request"
-  },
-  {
-    "id": null,
-    "group": "aor",
-    "name": "support_path",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Enables Path support for REGISTER requests and Route support for other requests."
-  },
-  {
-    "id": null,
-    "group": "system",
-    "name": "timer_t1",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "500",
-    "description": "Set transaction timer T1 value (milliseconds)."
-  },
-  {
-    "id": null,
-    "group": "system",
-    "name": "timer_b",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "32000",
-    "description": "Set transaction timer B value (milliseconds)."
-  },
-  {
-    "id": null,
-    "group": "system",
-    "name": "compact_headers",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Use the short forms of common SIP header names."
-  },
-  {
-    "id": null,
-    "group": "system",
-    "name": "threadpool_initial_size",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "0",
-    "description": "Initial number of threads in the res_pjsip threadpool."
-  },
-  {
-    "id": null,
-    "group": "system",
-    "name": "threadpool_auto_increment",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "5",
-    "description": "The amount by which the number of threads is incremented when necessary."
-  },
-  {
-    "id": null,
-    "group": "system",
-    "name": "threadpool_idle_timeout",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "60",
-    "description": "Number of seconds before an idle thread should be disposed of."
-  },
-  {
-    "id": null,
-    "group": "system",
-    "name": "threadpool_max_size",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "50",
-    "description": "Maximum number of threads in the res_pjsip threadpool. A value of 0 indicates no maximum."
-  },
-  {
-    "id": null,
-    "group": "system",
-    "name": "disable_tcp_switch",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "yes",
-    "description": "Disable automatic switching from UDP to TCP transports."
-  },
-  {
-    "id": null,
-    "group": "system",
-    "name": "follow_early_media_fork",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "yes",
-    "description": "Follow SDP forked media when To tag is different"
-  },
-  {
-    "id": null,
-    "group": "system",
-    "name": "accept_multiple_sdp_answers",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Follow SDP forked media when To tag is the same"
-  },
-  {
-    "id": null,
-    "group": "global",
-    "name": "max_forwards",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "70",
-    "description": "Value used in Max-Forwards header for SIP requests."
-  },
-  {
-    "id": null,
-    "group": "global",
-    "name": "keep_alive_interval",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "90",
-    "description": "The interval (in seconds) to send keepalives to active connection-oriented transports."
-  },
-  {
-    "id": null,
-    "group": "global",
-    "name": "contact_expiration_check_interval",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "30",
-    "description": "The interval (in seconds) to check for expired contacts."
-  },
-  {
-    "id": null,
-    "group": "global",
-    "name": "disable_multi_domain",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Disable Multi Domain support"
-  },
-  {
-    "id": null,
-    "group": "global",
-    "name": "max_initial_qualify_time",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "0",
-    "description": "The maximum amount of time from startup that qualifies should be attempted on all contacts. If greater than the qualify_frequency for an aor, qualify_frequency will be used instead."
-  },
-  {
-    "id": null,
-    "group": "global",
-    "name": "unidentified_request_period",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "5",
-    "description": "The number of seconds over which to accumulate unidentified requests."
-  },
-  {
-    "id": null,
-    "group": "global",
-    "name": "unidentified_request_count",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "5",
-    "description": "The number of unidentified requests from a single IP to allow."
-  },
-  {
-    "id": null,
-    "group": "global",
-    "name": "unidentified_request_prune_interval",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "30",
-    "description": "The interval at which unidentified requests are older than twice the unidentified_request_period are pruned."
-  },
-  {
-    "id": null,
-    "group": "global",
-    "name": "user_agent",
-    "type": "String",
-    "options": "",
-    "defaultValue": "p-line PBX GIT-15-e5a5948",
-    "description": "Value used in User-Agent header for SIP requests and Server header for SIP responses."
-  },
-  {
-    "id": null,
-    "group": "global",
-    "name": "regcontext",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "When set, p-line will dynamically create and destroy a NoOp priority 1 extension for a given peer who registers or unregisters with us."
-  },
-  {
-    "id": null,
-    "group": "global",
-    "name": "default_outbound_endpoint",
-    "type": "String",
-    "options": "",
-    "defaultValue": "default_outbound_endpoint",
-    "description": "Endpoint to use when sending an outbound request to a URI without a specified endpoint."
-  },
-  {
-    "id": null,
-    "group": "global",
-    "name": "default_voicemail_extension",
-    "type": "String",
-    "options": "",
-    "defaultValue": "",
-    "description": "The voicemail extension to send in the NOTIFY Message-Account header if not specified on endpoint or aor"
-  },
-  {
-    "id": null,
-    "group": "global",
-    "name": "debug",
-    "type": "String",
-    "options": "no",
-    "defaultValue": "Enable/Disable SIP debug logging. Valid options include yes",
-    "description": "no or a host address"
-  },
-  {
-    "id": null,
-    "group": "global",
-    "name": "endpoint_identifier_order",
-    "type": "String",
-    "options": "",
-    "defaultValue": "ip,username,anonymous",
-    "description": "The order by which endpoint identifiers are processed and checked. Identifier names are usually derived from and can be found in the endpoint identifier module itself (res_pjsip_endpoint_identifier_*). You can use the CLI command \"pjsip show identifiers\" to see the identifiers currently available."
-  },
-  {
-    "id": null,
-    "group": "global",
-    "name": "default_from_user",
-    "type": "String",
-    "options": "",
-    "defaultValue": "p-line",
-    "description": "When p-line generates an outgoing SIP request, the From header username will be set to this value if there is no better option (such as CallerID) to be used."
-  },
-  {
-    "id": null,
-    "group": "global",
-    "name": "default_realm",
-    "type": "String",
-    "options": "",
-    "defaultValue": "p-line",
-    "description": "When p-line generates a challenge, the digest realm will be set to this value if there is no better option (such as auth/realm) to be used."
-  },
-  {
-    "id": null,
-    "group": "global",
-    "name": "mwi_tps_queue_high",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "500",
-    "description": "MWI taskprocessor high water alert trigger level."
-  },
-  {
-    "id": null,
-    "group": "global",
-    "name": "mwi_tps_queue_low",
-    "type": "Integer",
-    "options": "",
-    "defaultValue": "-1",
-    "description": "MWI taskprocessor low water clear alert level."
-  },
-  {
-    "id": null,
-    "group": "global",
-    "name": "mwi_disable_initial_unsolicited",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Enable/Disable sending unsolicited MWI to all endpoints on startup."
-  },
-  {
-    "id": null,
-    "group": "global",
-    "name": "ignore_uri_user_options",
-    "type": "Boolean",
-    "options": "",
-    "defaultValue": "no",
-    "description": "Enable/Disable ignoring SIP URI user field options."
-  }
-]
+[ {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "100rel",
+  "type" : "Custom",
+  "options" : "{no=no, required=required, yes=yes}",
+  "defaultValue" : "yes",
+  "description" : "Allow support for RFC3262 provisional ACK tags"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "accept_multiple_sdp_answers",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Accept multiple SDP answers on non-100rel responses"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "accountcode",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "An accountcode to set automatically on any channels created for this endpoint."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "acl",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "List of IP ACL section names in acl.conf"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "aggregate_mwi",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "all",
+  "description" : "Condense MWI notifications into a single NOTIFY."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "allow",
+  "type" : "Custom",
+  "options" : "{ulaw=u-law, alaw=a-law, gsm=gsm, h264=h264, h263=h263}",
+  "defaultValue" : "ulaw",
+  "description" : "Media Codec(s) to allow"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "allow_overlap",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "yes",
+  "description" : "Enable RFC3578 overlap dialing support."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "allow_subscribe",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "yes",
+  "description" : "Determines if endpoint is allowed to initiate subscriptions with p-line."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "allow_transfer",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "yes",
+  "description" : "Determines whether SIP REFER transfers are allowed for this endpoint"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "aors",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "AoR(s) to be used with the endpoint"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "asymmetric_rtp_codec",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Allow the sending and receiving RTP codec to differ"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "auth",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Authentication Object(s) associated with the endpoint"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "bind_rtp_to_media_address",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Bind the RTP instance to the media_address"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "bundle",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Enable RTP bundling"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "call_group",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "The numeric pickup groups for a channel."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "callerid",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "CallerID information for the endpoint"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "callerid_privacy",
+  "type" : "Custom",
+  "options" : "{allowed_not_screened=allowed_not_screened, allowed_passed_screen=allowed_passed_screen, allowed_failed_screen=allowed_failed_screen, allowed=allowed, prohib_not_screened=prohib_not_screened, prohib_passed_screen=prohib_passed_screen, prohib_failed_screen=prohib_failed_screen, prohib=prohib, unavailable=unavailable}",
+  "defaultValue" : "allowed_not_screened",
+  "description" : "Default privacy level"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "callerid_tag",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Internal id_tag for the endpoint"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "connected_line_method",
+  "type" : "Custom",
+  "options" : "{invite=invite - When set to invite, check the remote's Allow header and if UPDATE is allowed, send UPDATE instead of INVITE to avoid SDP renegotiation. If UPDATE is not Allowed, send INVITE, reinvite=Alias for the invite value, update=update - If set to update, send UPDATE regardless of what the remote Allows}",
+  "defaultValue" : "invite",
+  "description" : "Connected line method type"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "contact_acl",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "List of Contact ACL section names in acl.conf"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "contact_deny",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "List of Contact header addresses to deny"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "contact_permit",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "List of Contact header addresses to permit"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "contact_user",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Force the user on the outgoing Contact header to this value."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "context",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "default",
+  "description" : "Dialplan context for inbound sessions"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "cos_audio",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "0",
+  "description" : "Priority for audio streams"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "cos_video",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "0",
+  "description" : "Priority for video streams"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "deny",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "List of IP addresses to deny access from"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "device_state_busy_at",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "0",
+  "description" : "The number of in-use channels which will cause busy to be returned as device state"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "direct_media",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "yes",
+  "description" : "Determines whether media may flow directly between endpoints."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "direct_media_glare_mitigation",
+  "type" : "Custom",
+  "options" : "{none=none, outgoing=outgoing, incoming=incoming}",
+  "defaultValue" : "none",
+  "description" : "Mitigation of direct media (re)INVITE glare"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "direct_media_method",
+  "type" : "Custom",
+  "options" : "{invite=invite, reinvite=reinvite - Alias for the invite value, update=update}",
+  "defaultValue" : "invite",
+  "description" : "Direct Media method type"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "disable_direct_media_on_nat",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Disable direct media session refreshes when NAT obstructs the media session"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "dtls_auto_generate_cert",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Whether or not to automatically generate an ephemeral X.509 certificate"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "dtls_ca_file",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Path to certificate authority certificate"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "dtls_ca_path",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Path to a directory containing certificate authority certificates"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "dtls_cert_file",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Path to certificate file to present to peer"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "dtls_cipher",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Cipher to use for DTLS negotiation"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "dtls_fingerprint",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Type of hash to use for the DTLS fingerprint in the SDP."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "dtls_private_key",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Path to private key for certificate file"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "dtls_rekey",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "0",
+  "description" : "Interval at which to renegotiate the TLS session and rekey the SRTP session"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "dtls_setup",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Whether we are willing to accept connections, connect to the other party, or both."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "dtls_verify",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Verify that the provided peer certificate is valid"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "dtmf_mode",
+  "type" : "Custom",
+  "options" : "{rfc4733=rfc4733 - DTMF is sent out of band of the main audio stream. This supercedes the older RFC-2833 used within the older chan_sip, inband=inband - DTMF is sent as part of audio stream, info=info - DTMF is sent as SIP INFO packets, auto=auto - DTMF is sent as RFC 4733 if the other side supports it or as INBAND if not, auto_info=auto_info - DTMF is sent as RFC 4733 if the other side supports it or as SIP INFO if not}",
+  "defaultValue" : "rfc4733",
+  "description" : "DTMF mode"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "fax_detect",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Whether CNG tone detection is enabled"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "fax_detect_timeout",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "0",
+  "description" : "How long into a call before fax_detect is disabled for the call"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "follow_early_media_fork",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "yes",
+  "description" : "Follow SDP forked media when To tag is different"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "force_avp",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Determines whether res_pjsip will use and enforce usage of AVP, regardless of the RTP profile in use for this endpoint."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "force_rport",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "yes",
+  "description" : "Force use of return port"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "from_domain",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Domain to user in From header for requests to this endpoint."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "from_user",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Username to use in From header for requests to this endpoint."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "g726_non_standard",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Force g.726 to use AAL2 packing order when negotiating g.726 audio"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "ice_support",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Enable the ICE mechanism to help traverse NAT"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "identify_by",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "username,ip",
+  "description" : "Way(s) for the endpoint to be identified"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "inband_progress",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Determines whether chan_pjsip will indicate ringing using inband progress."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "incoming_mwi_mailbox",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Mailbox name to use when incoming MWI NOTIFYs are received"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "language",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Set the default language to use for channels created for this endpoint."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "mailboxes",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "NOTIFY the endpoint when state changes for any of the specified mailboxes"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "max_audio_streams",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "1",
+  "description" : "The maximum number of allowed audio streams for the endpoint"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "max_video_streams",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "1",
+  "description" : "The maximum number of allowed video streams for the endpoint"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "media_address",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "IP address used in SDP for media handling"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "media_encryption",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Determines whether res_pjsip will use and enforce usage of media encryption for this endpoint."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "media_encryption_optimistic",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Determines whether encryption should be used if possible but does not terminate the session if not achieved."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "media_use_received_transport",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Determines whether res_pjsip will use the media transport received in the offer SDP in the corresponding answer SDP."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "message_context",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Context to route incoming MESSAGE requests to."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "moh_passthrough",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Determines whether hold and unhold will be passed through using re-INVITEs with recvonly and sendrecv to the remote side"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "moh_suggest",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "default",
+  "description" : "Default Music On Hold class"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "mwi_from_user",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Username to use in From header for unsolicited MWI NOTIFYs to this endpoint."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "mwi_subscribe_replaces_unsolicited",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "An MWI subscribe will replace sending unsolicited NOTIFYs"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "named_call_group",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "The named pickup groups for a channel."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "named_pickup_group",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "The named pickup groups that a channel can pickup."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "notify_early_inuse_ringing",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Whether to notifies dialog-info 'early' on InUse&Ringing state"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "one_touch_recording",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Determines whether one-touch recording is allowed for this endpoint."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "outbound_auth",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Authentication object(s) used for outbound requests"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "outbound_proxy",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Full SIP URI of the outbound proxy used to send requests"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "permit",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "List of IP addresses to permit access from"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "pickup_group",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "The numeric pickup groups that a channel can pickup."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "preferred_codec_only",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Respond to a SIP invite with the single most preferred codec rather than advertising all joint codec capabilities. This limits the other side's codec choice to exactly what we prefer."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "record_off_feature",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "automixmon",
+  "description" : "The feature to enact when one-touch recording is turned off."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "record_on_feature",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "automixmon",
+  "description" : "The feature to enact when one-touch recording is turned on."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "redirect_method",
+  "type" : "Custom",
+  "options" : "{user=user, uri_core=uri_core, uri_pjsip=uri_pjsip}",
+  "defaultValue" : "user",
+  "description" : "How redirects received from an endpoint are handled"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "refer_blind_progress",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "yes",
+  "description" : "Whether to notifies all the progress details on blind transfer"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "rewrite_contact",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Allow Contact header to be rewritten with the source IP address-port"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "rpid_immediate",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Immediately send connected line updates on unanswered incoming calls."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "rtcp_mux",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Enable RFC 5761 RTCP multiplexing on the RTP port"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "rtp_engine",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "p-line",
+  "description" : "Name of the RTP engine to use for channels created for this endpoint"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "rtp_ipv6",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Allow use of IPv6 for RTP traffic"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "rtp_keepalive",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "0",
+  "description" : "Number of seconds between RTP comfort noise keepalive packets."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "rtp_symmetric",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Enforce that RTP must be symmetric"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "rtp_timeout",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "0",
+  "description" : "Maximum number of seconds without receiving RTP (while off hold) before terminating call."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "rtp_timeout_hold",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "0",
+  "description" : "Maximum number of seconds without receiving RTP (while on hold) before terminating call."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "sdp_owner",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "p-line-sdp",
+  "description" : "String placed as the username portion of an SDP origin (o=) line."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "sdp_session",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "p-line",
+  "description" : "String used for the SDP session (s=) line."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "send_diversion",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "yes",
+  "description" : "Send the Diversion header, conveying the diversion information to the called user agent"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "send_pai",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Send the P-Asserted-Identity header"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "send_rpid",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Send the Remote-Party-ID header"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "set_var",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Variable set on a channel involving the endpoint."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "srtp_tag_32",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Determines whether 32 byte tags should be used instead of 80 byte tags."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "sub_min_expiry",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "0",
+  "description" : "The minimum allowed expiry time for subscriptions initiated by the endpoint."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "subscribe_context",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Context for incoming MESSAGE requests."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "suppress_q850_reason_headers",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Suppress Q.850 Reason headers for this endpoint"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "t38_udptl",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Whether T.38 UDPTL support is enabled or not"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "t38_udptl_ec",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "none",
+  "description" : "T.38 UDPTL error correction method"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "t38_udptl_ipv6",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Whether IPv6 is used for UDPTL Sessions"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "t38_udptl_maxdatagram",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "0",
+  "description" : "T.38 UDPTL maximum datagram size"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "t38_udptl_nat",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Whether NAT support is enabled on UDPTL sessions"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "timers",
+  "type" : "Custom",
+  "options" : "{no=no, yes=yes, required=required, always=always, forced=forced - Alias of always}",
+  "defaultValue" : "yes",
+  "description" : "Session timers for SIP packets"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "timers_min_se",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "90",
+  "description" : "Minimum session timers expiration period"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "timers_sess_expires",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "1800",
+  "description" : "Maximum session timer expiration period"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "tone_zone",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Set which country's indications to use for channels created for this endpoint."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "tos_audio",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "0",
+  "description" : "DSCP TOS bits for audio streams"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "tos_video",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "0",
+  "description" : "DSCP TOS bits for video streams"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "transport",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Explicit transport configuration to use"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "trust_id_inbound",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Accept identification information received from this endpoint"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "trust_id_outbound",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Send private identification details to the endpoint."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "use_avpf",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Determines whether res_pjsip will use and enforce usage of AVPF for this endpoint."
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "use_ptime",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Use Endpoint's requested packetization interval"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "user_eq_phone",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Determines whether a user=phone parameter is placed into the request URI if the user is determined to be a phone number"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "voicemail_extension",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "The voicemail extension to send in the NOTIFY Message-Account header"
+}, {
+  "id" : null,
+  "group" : "endpoint",
+  "name" : "webrtc",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Defaults and enables some options that are relevant to WebRTC"
+}, {
+  "id" : null,
+  "group" : "auth",
+  "name" : "auth_type",
+  "type" : "Custom",
+  "options" : "{md5=md5, userpass=userpass, google_oauth=google_oauth}",
+  "defaultValue" : "userpass",
+  "description" : "Authentication type"
+}, {
+  "id" : null,
+  "group" : "auth",
+  "name" : "nonce_lifetime",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "32",
+  "description" : "Lifetime of a nonce associated with this authentication config."
+}, {
+  "id" : null,
+  "group" : "auth",
+  "name" : "md5_cred",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "MD5 Hash used for authentication."
+}, {
+  "id" : null,
+  "group" : "auth",
+  "name" : "password",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Plain text password used for authentication."
+}, {
+  "id" : null,
+  "group" : "auth",
+  "name" : "realm",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "SIP realm for endpoint"
+}, {
+  "id" : null,
+  "group" : "auth",
+  "name" : "username",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Username to use for account"
+}, {
+  "id" : null,
+  "group" : "transport",
+  "name" : "bind",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "IP Address and optional port to bind to for this transport"
+}, {
+  "id" : null,
+  "group" : "transport",
+  "name" : "ca_list_file",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "File containing a list of certificates to read (TLS ONLY, not WSS)"
+}, {
+  "id" : null,
+  "group" : "transport",
+  "name" : "ca_list_path",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Path to directory containing a list of certificates to read (TLS ONLY, not WSS)"
+}, {
+  "id" : null,
+  "group" : "transport",
+  "name" : "cert_file",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Certificate file for endpoint (TLS ONLY, not WSS)"
+}, {
+  "id" : null,
+  "group" : "transport",
+  "name" : "cipher",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Preferred cryptography cipher names (TLS ONLY, not WSS)"
+}, {
+  "id" : null,
+  "group" : "transport",
+  "name" : "domain",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Domain the transport comes from"
+}, {
+  "id" : null,
+  "group" : "transport",
+  "name" : "external_media_address",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "External IP address to use in RTP handling"
+}, {
+  "id" : null,
+  "group" : "transport",
+  "name" : "external_signaling_address",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "External address for SIP signalling"
+}, {
+  "id" : null,
+  "group" : "transport",
+  "name" : "external_signaling_port",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "0",
+  "description" : "External port for SIP signalling"
+}, {
+  "id" : null,
+  "group" : "transport",
+  "name" : "method",
+  "type" : "Custom",
+  "options" : "{default=default - The default as defined by PJSIP. This is currently TLSv1, but may change with future releases, unspecified=unspecified - This option is equivalent to setting 'default', tlsv1=tlsv1, tlsv1_1=tlsv1_1, tlsv1_2=tlsv1_2, sslv2=sslv2, sslv3=sslv3, sslv23=sslv23}",
+  "defaultValue" : "",
+  "description" : "Method of SSL transport (TLS ONLY, not WSS)"
+}, {
+  "id" : null,
+  "group" : "transport",
+  "name" : "local_net",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Network to consider local (used for NAT purposes)."
+}, {
+  "id" : null,
+  "group" : "transport",
+  "name" : "password",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Password required for transport"
+}, {
+  "id" : null,
+  "group" : "transport",
+  "name" : "priv_key_file",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Private key file (TLS ONLY, not WSS)"
+}, {
+  "id" : null,
+  "group" : "transport",
+  "name" : "protocol",
+  "type" : "Custom",
+  "options" : "{udp=udp, tcp=tcp, tls=tls, ws=ws, wss=wss}",
+  "defaultValue" : "udp",
+  "description" : "Protocol to use for SIP traffic"
+}, {
+  "id" : null,
+  "group" : "transport",
+  "name" : "require_client_cert",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Require client certificate (TLS ONLY, not WSS)"
+}, {
+  "id" : null,
+  "group" : "transport",
+  "name" : "verify_client",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Require verification of client certificate (TLS ONLY, not WSS)"
+}, {
+  "id" : null,
+  "group" : "transport",
+  "name" : "verify_server",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Require verification of server certificate (TLS ONLY, not WSS)"
+}, {
+  "id" : null,
+  "group" : "transport",
+  "name" : "tos",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "0",
+  "description" : "Enable TOS for the signalling sent over this transport"
+}, {
+  "id" : null,
+  "group" : "transport",
+  "name" : "cos",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "0",
+  "description" : "Enable COS for the signalling sent over this transport"
+}, {
+  "id" : null,
+  "group" : "transport",
+  "name" : "websocket_write_timeout",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "100",
+  "description" : "The timeout (in milliseconds) to set on WebSocket connections."
+}, {
+  "id" : null,
+  "group" : "transport",
+  "name" : "allow_reload",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Allow this transport to be reloaded."
+}, {
+  "id" : null,
+  "group" : "transport",
+  "name" : "symmetric_transport",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Use the same transport for outgoing requests as incoming ones."
+}, {
+  "id" : null,
+  "group" : "contact",
+  "name" : "uri",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "SIP URI to contact peer"
+}, {
+  "id" : null,
+  "group" : "contact",
+  "name" : "expiration_time",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Time to keep alive a contact"
+}, {
+  "id" : null,
+  "group" : "contact",
+  "name" : "qualify_frequency",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "0",
+  "description" : "Interval at which to qualify a contact"
+}, {
+  "id" : null,
+  "group" : "contact",
+  "name" : "qualify_timeout",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "3",
+  "description" : "Timeout for qualify"
+}, {
+  "id" : null,
+  "group" : "contact",
+  "name" : "authenticate_qualify",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Authenticates a qualify challenge response if needed"
+}, {
+  "id" : null,
+  "group" : "contact",
+  "name" : "outbound_proxy",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Outbound proxy used when sending OPTIONS request"
+}, {
+  "id" : null,
+  "group" : "contact",
+  "name" : "path",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Stored Path vector for use in Route headers on outgoing requests."
+}, {
+  "id" : null,
+  "group" : "contact",
+  "name" : "user_agent",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "p-line pbx version 2.0.01",
+  "description" : "User-Agent header from registration."
+}, {
+  "id" : null,
+  "group" : "contact",
+  "name" : "endpoint",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Endpoint name"
+}, {
+  "id" : null,
+  "group" : "contact",
+  "name" : "reg_server",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "p-line Server name"
+}, {
+  "id" : null,
+  "group" : "contact",
+  "name" : "via_addr",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "IP-address of the last Via header from registration."
+}, {
+  "id" : null,
+  "group" : "contact",
+  "name" : "via_port",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "0",
+  "description" : "IP-port of the last Via header from registration."
+}, {
+  "id" : null,
+  "group" : "contact",
+  "name" : "call_id",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Call-ID header from registration."
+}, {
+  "id" : null,
+  "group" : "contact",
+  "name" : "prune_on_boot",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "A contact that cannot survive a restart/boot."
+}, {
+  "id" : null,
+  "group" : "aor",
+  "name" : "contact",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Permanent contacts assigned to AoR"
+}, {
+  "id" : null,
+  "group" : "aor",
+  "name" : "default_expiration",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "3600",
+  "description" : "Default expiration time in seconds for contacts that are dynamically bound to an AoR."
+}, {
+  "id" : null,
+  "group" : "aor",
+  "name" : "mailboxes",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Allow subscriptions for the specified mailbox(es)"
+}, {
+  "id" : null,
+  "group" : "aor",
+  "name" : "voicemail_extension",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "The voicemail extension to send in the NOTIFY Message-Account header"
+}, {
+  "id" : null,
+  "group" : "aor",
+  "name" : "maximum_expiration",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "7200",
+  "description" : "Maximum time to keep an AoR"
+}, {
+  "id" : null,
+  "group" : "aor",
+  "name" : "max_contacts",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "0",
+  "description" : "Maximum number of contacts that can bind to an AoR"
+}, {
+  "id" : null,
+  "group" : "aor",
+  "name" : "minimum_expiration",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "60",
+  "description" : "Minimum keep alive time for an AoR"
+}, {
+  "id" : null,
+  "group" : "aor",
+  "name" : "remove_existing",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Determines whether new contacts replace existing ones."
+}, {
+  "id" : null,
+  "group" : "aor",
+  "name" : "qualify_frequency",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "0",
+  "description" : "Interval at which to qualify an AoR"
+}, {
+  "id" : null,
+  "group" : "aor",
+  "name" : "qualify_timeout",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "3",
+  "description" : "Timeout for qualify"
+}, {
+  "id" : null,
+  "group" : "aor",
+  "name" : "authenticate_qualify",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Authenticates a qualify challenge response if needed"
+}, {
+  "id" : null,
+  "group" : "aor",
+  "name" : "outbound_proxy",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "Outbound proxy used when sending OPTIONS request"
+}, {
+  "id" : null,
+  "group" : "aor",
+  "name" : "support_path",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Enables Path support for REGISTER requests and Route support for other requests."
+}, {
+  "id" : null,
+  "group" : "system",
+  "name" : "timer_t1",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "500",
+  "description" : "Set transaction timer T1 value (milliseconds)."
+}, {
+  "id" : null,
+  "group" : "system",
+  "name" : "timer_b",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "32000",
+  "description" : "Set transaction timer B value (milliseconds)."
+}, {
+  "id" : null,
+  "group" : "system",
+  "name" : "compact_headers",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Use the short forms of common SIP header names."
+}, {
+  "id" : null,
+  "group" : "system",
+  "name" : "threadpool_initial_size",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "0",
+  "description" : "Initial number of threads in the res_pjsip threadpool."
+}, {
+  "id" : null,
+  "group" : "system",
+  "name" : "threadpool_auto_increment",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "5",
+  "description" : "The amount by which the number of threads is incremented when necessary."
+}, {
+  "id" : null,
+  "group" : "system",
+  "name" : "threadpool_idle_timeout",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "60",
+  "description" : "Number of seconds before an idle thread should be disposed of."
+}, {
+  "id" : null,
+  "group" : "system",
+  "name" : "threadpool_max_size",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "50",
+  "description" : "Maximum number of threads in the res_pjsip threadpool. A value of 0 indicates no maximum."
+}, {
+  "id" : null,
+  "group" : "system",
+  "name" : "disable_tcp_switch",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "yes",
+  "description" : "Disable automatic switching from UDP to TCP transports."
+}, {
+  "id" : null,
+  "group" : "system",
+  "name" : "follow_early_media_fork",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "yes",
+  "description" : "Follow SDP forked media when To tag is different"
+}, {
+  "id" : null,
+  "group" : "system",
+  "name" : "accept_multiple_sdp_answers",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Follow SDP forked media when To tag is the same"
+}, {
+  "id" : null,
+  "group" : "global",
+  "name" : "max_forwards",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "70",
+  "description" : "Value used in Max-Forwards header for SIP requests."
+}, {
+  "id" : null,
+  "group" : "global",
+  "name" : "keep_alive_interval",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "90",
+  "description" : "The interval (in seconds) to send keepalives to active connection-oriented transports."
+}, {
+  "id" : null,
+  "group" : "global",
+  "name" : "contact_expiration_check_interval",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "30",
+  "description" : "The interval (in seconds) to check for expired contacts."
+}, {
+  "id" : null,
+  "group" : "global",
+  "name" : "disable_multi_domain",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Disable Multi Domain support"
+}, {
+  "id" : null,
+  "group" : "global",
+  "name" : "max_initial_qualify_time",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "0",
+  "description" : "The maximum amount of time from startup that qualifies should be attempted on all contacts. If greater than the qualify_frequency for an aor, qualify_frequency will be used instead."
+}, {
+  "id" : null,
+  "group" : "global",
+  "name" : "unidentified_request_period",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "5",
+  "description" : "The number of seconds over which to accumulate unidentified requests."
+}, {
+  "id" : null,
+  "group" : "global",
+  "name" : "unidentified_request_count",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "5",
+  "description" : "The number of unidentified requests from a single IP to allow."
+}, {
+  "id" : null,
+  "group" : "global",
+  "name" : "unidentified_request_prune_interval",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "30",
+  "description" : "The interval at which unidentified requests are older than twice the unidentified_request_period are pruned."
+}, {
+  "id" : null,
+  "group" : "global",
+  "name" : "user_agent",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "p-line PBX GIT-15-e5a5948",
+  "description" : "Value used in User-Agent header for SIP requests and Server header for SIP responses."
+}, {
+  "id" : null,
+  "group" : "global",
+  "name" : "regcontext",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "When set, p-line will dynamically create and destroy a NoOp priority 1 extension for a given peer who registers or unregisters with us."
+}, {
+  "id" : null,
+  "group" : "global",
+  "name" : "default_outbound_endpoint",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "default_outbound_endpoint",
+  "description" : "Endpoint to use when sending an outbound request to a URI without a specified endpoint."
+}, {
+  "id" : null,
+  "group" : "global",
+  "name" : "default_voicemail_extension",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "",
+  "description" : "The voicemail extension to send in the NOTIFY Message-Account header if not specified on endpoint or aor"
+}, {
+  "id" : null,
+  "group" : "global",
+  "name" : "debug",
+  "type" : "String",
+  "options" : "no",
+  "defaultValue" : "Enable/Disable SIP debug logging. Valid options include yes",
+  "description" : "no or a host address"
+}, {
+  "id" : null,
+  "group" : "global",
+  "name" : "endpoint_identifier_order",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "ip,username,anonymous",
+  "description" : "The order by which endpoint identifiers are processed and checked. Identifier names are usually derived from and can be found in the endpoint identifier module itself (res_pjsip_endpoint_identifier_*). You can use the CLI command \"pjsip show identifiers\" to see the identifiers currently available."
+}, {
+  "id" : null,
+  "group" : "global",
+  "name" : "default_from_user",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "p-line",
+  "description" : "When p-line generates an outgoing SIP request, the From header username will be set to this value if there is no better option (such as CallerID) to be used."
+}, {
+  "id" : null,
+  "group" : "global",
+  "name" : "default_realm",
+  "type" : "String",
+  "options" : "",
+  "defaultValue" : "p-line",
+  "description" : "When p-line generates a challenge, the digest realm will be set to this value if there is no better option (such as auth/realm) to be used."
+}, {
+  "id" : null,
+  "group" : "global",
+  "name" : "mwi_tps_queue_high",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "500",
+  "description" : "MWI taskprocessor high water alert trigger level."
+}, {
+  "id" : null,
+  "group" : "global",
+  "name" : "mwi_tps_queue_low",
+  "type" : "Integer",
+  "options" : "",
+  "defaultValue" : "-1",
+  "description" : "MWI taskprocessor low water clear alert level."
+}, {
+  "id" : null,
+  "group" : "global",
+  "name" : "mwi_disable_initial_unsolicited",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Enable/Disable sending unsolicited MWI to all endpoints on startup."
+}, {
+  "id" : null,
+  "group" : "global",
+  "name" : "ignore_uri_user_options",
+  "type" : "Boolean",
+  "options" : "",
+  "defaultValue" : "no",
+  "description" : "Enable/Disable ignoring SIP URI user field options."
+} ]

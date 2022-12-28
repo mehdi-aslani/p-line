@@ -30,8 +30,8 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
                 .collect(Collectors.toList());
 
         body.setMessages(errors);
-        body.addMessage("timestamp: " + new Date());
-        body.addMessage("status: " + status.value());
+        // body.addMessage("timestamp: " + new Date());
+        // body.addMessage("status: " + status.value());
         body.setHasError(errors.size() > 0);
 
         return new ResponseEntity<>(body, headers, 200);

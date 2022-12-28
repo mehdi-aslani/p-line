@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import ir.peeco.pline.models.TblSipTrunk;
-import ir.peeco.pline.repositories.SipProfilesRepository;
+import ir.peeco.pline.pline.ApiResult;
 import ir.peeco.pline.repositories.SipTrunkRepository;
 
 @RestController
@@ -27,18 +28,6 @@ import ir.peeco.pline.repositories.SipTrunkRepository;
 public class SipTrunksController {
 
     private SipTrunkRepository sipTrunkRepository;
-    private SipProfilesRepository sipProfilesRepository;
-    // private javax.servlet.http.HttpSession HttpSession;
-
-    // @Autowired
-    // public void setHttpSession(javax.servlet.http.HttpSession httpSession) {
-    // HttpSession = httpSession;
-    // }
-
-    @Autowired
-    public void setSipProfilesRepository(SipProfilesRepository sipProfilesRepository) {
-        this.sipProfilesRepository = sipProfilesRepository;
-    }
 
     @Autowired
     public void setSipTrunkRepository(SipTrunkRepository sipTrunkRepository) {
@@ -46,7 +35,7 @@ public class SipTrunksController {
     }
 
     @GetMapping("/index")
-    public ResponseEntity<Object> index(@RequestParam(required = false) Map<String, String> params) {
+    public ResponseEntity<Page<TblSipTrunk>> index(@RequestParam(required = false) Map<String, String> params) {
         // var id = HttpSession.getAttribute("user");
         int page = 0;
         if (params.get("page") != null) {
@@ -71,87 +60,74 @@ public class SipTrunksController {
         var table = sipTrunkRepository.findAllBy(
                 params.get("name") == null ? "" : params.get("name"),
                 params.get("username") == null ? "" : params.get("username"),
-                params.get("realm") == null ? "" : params.get("realm"),
+                params.get("fromUser") == null ? "" : params.get("fromUser"),
+                params.get("fromDomain") == null ? "" : params.get("fromDomain"),
                 params.get("proxy") == null ? "" : params.get("proxy"),
                 pageable);
         return ResponseEntity.ok(table);
     }
 
     @GetMapping("/get")
-    public ResponseEntity<Object> get(@RequestParam String id) {
-        Map<String, Object> result = new HashMap<>();
-        if (id.trim().isEmpty()) {
-            var profile = sipProfilesRepository.findAll();
-            result.put("sipProfiles", profile);
-            result.put("data", new TblSipTrunk());
-            return ResponseEntity.ok(result);
-        }
-        var table = sipTrunkRepository.findById(Long.valueOf(id));
-        var profile = sipProfilesRepository.findAll();
-        result.put("sipProfiles", profile);
-        result.put("data", table);
-        return ResponseEntity.ok(result);
+    public ResponseEntity<?> get(@RequestParam(name = "id") Long id) {
+        var data = sipTrunkRepository.findById(id);
+        if (data.isEmpty())
+            return ResponseEntity.ok(new TblSipTrunk());
+        return ResponseEntity.ok(data);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Object> create(@Valid @RequestBody TblSipTrunk sipTrunk) {
+    public ResponseEntity<ApiResult> create(@Valid @RequestBody TblSipTrunk sipTrunk) {
 
-        Map<String, Object> result = new HashMap<>();
-        ArrayList<String> errors = new ArrayList<>();
+        var result = new ApiResult();
 
-        if (sipTrunk.name.trim().isEmpty()) {
-            errors.add("'Name' cannot be Empty");
+        if (sipTrunk.getName().trim().isEmpty()) {
+            result.addMessage("'Name' cannot be Empty");
         }
 
-        if (sipTrunkRepository.countAllByName(sipTrunk.name) > 0) {
-            errors.add("The name is duplicate");
+        if (sipTrunkRepository.countAllByName(sipTrunk.getName()) > 0) {
+            result.addMessage("The name is duplicate");
         }
 
-        if (errors.size() == 0) {
+        if (result.getMessages().size() == 0) {
             sipTrunkRepository.save(sipTrunk);
         }
 
-        result.put("error", errors.size() > 0);
-        result.put("errorsDesc", errors);
+        result.setHasError(result.getMessages().size() > 0);
         return ResponseEntity.ok(result);
     }
 
     @PostMapping("/update")
-    public ResponseEntity<Object> update(@Valid @RequestBody TblSipTrunk sipTrunk) {
+    public ResponseEntity<ApiResult> update(@Valid @RequestBody TblSipTrunk sipTrunk) {
 
-        Map<String, Object> result = new HashMap<>();
-        ArrayList<String> errors = new ArrayList<>();
+        var result = new ApiResult();
 
-        if (sipTrunk.name.trim().isEmpty()) {
-            errors.add("'Name' cannot be Empty");
+        if (sipTrunk.getName().trim().isEmpty()) {
+            result.addMessage("'Name' cannot be Empty");
         }
 
-        var data = sipTrunkRepository.findByName(sipTrunk.name);
-        if (data != null && data.id != sipTrunk.id) {
-            errors.add("The name is duplicate");
+        var data = sipTrunkRepository.findByName(sipTrunk.getName());
+        if (data != null && data.getId() != sipTrunk.getId()) {
+            result.addMessage("The name is duplicate");
         }
 
-        if (errors.size() == 0) {
+        if (result.getMessages().size() == 0) {
             sipTrunkRepository.save(sipTrunk);
         }
 
-        result.put("error", errors.size() > 0);
-        result.put("errorsDesc", errors);
+        result.setHasError(result.getMessages().size() > 0);
         return ResponseEntity.ok(result);
     }
 
     @PostMapping("/delete")
-    public ResponseEntity<Object> delete(@RequestBody Map<String, Long> body) {
+    public ResponseEntity<ApiResult> delete(@RequestBody Map<String, Long> body) {
 
-        Map<String, Object> result = new HashMap<>();
-        ArrayList<String> errors = new ArrayList<>();
+        var result = new ApiResult();
         try {
             sipTrunkRepository.deleteById(body.get("id"));
         } catch (Exception ex) {
-            errors.add("An error occurred while delete item. Contact the system administrator");
+            result.addMessage("An error occurred while delete item. Contact the system administrator");
         }
-        result.put("error", errors.size() > 0);
-        result.put("errorsDesc", errors);
+        result.setHasError(result.getMessages().size() > 0);
         return ResponseEntity.ok(result);
     }
 }

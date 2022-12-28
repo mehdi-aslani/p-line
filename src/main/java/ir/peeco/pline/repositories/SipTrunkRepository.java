@@ -14,10 +14,12 @@ public interface SipTrunkRepository extends JpaRepository<TblSipTrunk, Long> {
 
         // Name Username Realm Proxy
         @Query(value = "SELECT t.* FROM #{#entityName} t WHERE t.name LIKE %:name% AND t.username LIKE %:username% " +
-                        "AND t.username LIKE %:username%  AND t.realm LIKE %:realm% AND t.proxy LIKE %:proxy%", nativeQuery = true)
+                        "AND t.username LIKE %:username%  AND t.from_user LIKE %:fromUser% " +
+                        "AND t.from_domain LIKE %:fromDomain% AND t.proxy LIKE %:proxy%", nativeQuery = true)
         Page<TblSipTrunk> findAllBy(@Param("name") String name,
                         @Param("username") String username,
-                        @Param("realm") String realm,
+                        @Param("fromUser") String fromUser,
+                        @Param("fromDomain") String fromDomain,
                         @Param("proxy") String proxy,
                         Pageable pageable);
 

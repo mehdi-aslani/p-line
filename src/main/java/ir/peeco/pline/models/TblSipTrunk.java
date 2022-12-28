@@ -4,63 +4,71 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Table
 @Entity(name = "tbl_sip_trunks")
 public class TblSipTrunk {
 
+    public enum SipTrunkMode {
+        NoRegister(0),
+        Registrable(1),
+        register(2);
+
+        public final int mode;
+
+        private SipTrunkMode(int mode) {
+            this.mode = mode;
+        }
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
     @Column(nullable = false, unique = true)
-    @NotEmpty(message = "'Contact Expiration Check Interval' cannot be null")
-    public String name = "";
+    @NotEmpty(message = "name cannot be Empty")
+    private String name = "";
+
+    @Column(nullable = false, length = 1024)
+    private String acl = "";
 
     @Column(nullable = false)
-    public String cidr = "";
+    private String username = "";
 
     @Column(nullable = false)
-    public String username = "";
+    private String password = "";
 
     @Column(nullable = false)
-    public String password = "";
+    private String fromUser = "";
 
     @Column(nullable = false)
-    public String realm = "";
+    private String fromDomain = "";
 
     @Column(nullable = false)
-    public String fromUser = "";
+    private String callerIdName = "";
 
     @Column(nullable = false)
-    public String fromDomain = "";
+    private String callerIdNumber = "";
 
     @Column(nullable = false)
-    public String effectiveCallerIdName = "";
+    private String proxy = "";
 
     @Column(nullable = false)
-    public String effectiveCallerIdNumber = "";
+    private SipTrunkMode registerMode = SipTrunkMode.NoRegister;
 
     @Column(nullable = false)
-    public String prefixCallerIdNumber = "";
-
-    @Column(nullable = false)
-    public String proxy = "";
-
-    @Column(nullable = false)
-    public boolean register = false;
-
-    @Column(nullable = false)
-    public int maxCalls = 30;
+    private int maxCalls = 30;
 
     @OneToOne
-    public TblSipProfile tblSipProfile;
+    @NotNull(message = "SIP Profile cannot be Empty")
+    private TblSipProfile sipProfile;
 
     @Column(nullable = false)
-    public boolean enable = true;
+    private boolean enable = true;
 
     @Column(length = 1024)
-    public String description = "";
+    private String description = "";
 
 }
