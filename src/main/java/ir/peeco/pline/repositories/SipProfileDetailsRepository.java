@@ -22,7 +22,7 @@ public interface SipProfileDetailsRepository extends JpaRepository<TblSipProfile
     @Query(value = "SELECT t.* FROM #{#entityName} t WHERE t.sip_profile_id=:id", nativeQuery = true)
     List<TblSipProfileDetails> getBySipProfileId(@Param("id") Long sipProfileId);
 
-    @Query(value = "SELECT t.* FROM #{#entityName} t WHERE t.sip_profile_id=:id AND t._type=:type", nativeQuery = true)
+    @Query(value = "SELECT t.* FROM #{#entityName} t WHERE t.sip_profile_id=:id AND t.sip_type=:type", nativeQuery = true)
     List<TblSipProfileDetails> getBySipProfileIdAndType(@Param("id") Long sipProfileId, @Param("type") String type);
 
 }

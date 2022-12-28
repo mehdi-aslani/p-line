@@ -5,11 +5,14 @@ import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -148,7 +151,8 @@ public class PlineTools {
             String path = this.getConfigPath() + folder;
 
             if (!new File(path).exists()) {
-                new File(path).mkdirs();
+                var r = new File(path).mkdirs();
+                System.out.println(r);
             }
 
             File infoFile = new File(path + filename);
@@ -175,6 +179,7 @@ public class PlineTools {
                     for (String desc : descs) {
                         fileWriter.println(";" + desc);
                     }
+                    fileWriter.println();
                 }
                 if (!ic.getTemplate().isEmpty())
                     fileWriter.println("[" + ic.getContext() + "](" + ic.getTemplate() + ")");
@@ -202,6 +207,43 @@ public class PlineTools {
             this.plineLogger("Error in write info file: " + ex.getMessage());
         }
         return false;
+    }
+
+    public boolean IncludeConfigFile(String folder, String filename, List<String> includes) {
+        try {
+            if (!filename.endsWith(".conf")) {
+                filename += ".conf";
+            }
+            this.plineLogger("Start write info file: " + filename);
+
+            if (!folder.endsWith("/")) {
+                folder = folder + "/";
+            }
+            String path = this.getConfigPath() + folder;
+
+            if (!new File(path).exists()) {
+                new File(path).mkdirs();
+            }
+
+            File infoFile = new File(path + filename);
+            if (!infoFile.exists() && infoFile.createNewFile()) {
+                this.plineLogger("Create info file: " + filename);
+            }
+
+            includes.forEach(x -> {
+                try {
+                    Files.write(Paths.get(infoFile.getPath()), ("#include \"" + x.trim() + "\"\n").getBytes(),
+                            StandardOpenOption.APPEND);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+            Files.write(Paths.get(infoFile.getPath()), "\n".getBytes(), StandardOpenOption.APPEND);
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+
     }
 
 }

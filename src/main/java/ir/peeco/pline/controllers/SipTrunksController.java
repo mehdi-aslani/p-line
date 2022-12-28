@@ -17,20 +17,19 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-
 import ir.peeco.pline.models.TblSipTrunk;
 import ir.peeco.pline.pline.ApiResult;
-import ir.peeco.pline.repositories.SipTrunkRepository;
+import ir.peeco.pline.repositories.SipTrunksRepository;
 
 @RestController
 @CrossOrigin(value = "*", maxAge = 300)
 @RequestMapping("/sip-trunks")
 public class SipTrunksController {
 
-    private SipTrunkRepository sipTrunkRepository;
+    private SipTrunksRepository sipTrunkRepository;
 
     @Autowired
-    public void setSipTrunkRepository(SipTrunkRepository sipTrunkRepository) {
+    public void setSipTrunkRepository(SipTrunksRepository sipTrunkRepository) {
         this.sipTrunkRepository = sipTrunkRepository;
     }
 

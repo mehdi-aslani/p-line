@@ -10,13 +10,17 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import ir.peeco.pline.models.TblSipGlobals;
+import ir.peeco.pline.models.TblSipProfile;
+import ir.peeco.pline.models.TblSipProfileDetails;
 import ir.peeco.pline.models.TblSipSystems;
+import ir.peeco.pline.models.TblSipTrunk;
 import ir.peeco.pline.pline.InfoConfiguration;
 import ir.peeco.pline.pline.PlineTools;
 import ir.peeco.pline.repositories.SipGlobalsRepository;
 import ir.peeco.pline.repositories.SipProfileDetailsRepository;
 import ir.peeco.pline.repositories.SipProfilesRepository;
 import ir.peeco.pline.repositories.SipSystemsRepository;
+import ir.peeco.pline.repositories.SipTrunksRepository;
 
 @Component
 @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
@@ -24,9 +28,15 @@ public class PjsipFileGenrator {
 
   private PlineTools plineTools;
   private SipProfileDetailsRepository sipProfileDetailsRepository;
-  private SipProfilesRepository profilesRepository;
+  private SipProfilesRepository sipProfilesRepository;
   private SipGlobalsRepository sipGlobalsRepository;
   private SipSystemsRepository sipSystemsRepository;
+  private SipTrunksRepository sipTrunkRepository;
+
+  @Autowired
+  public void setSipTrunkRepository(SipTrunksRepository sipTrunkRepository) {
+    this.sipTrunkRepository = sipTrunkRepository;
+  }
 
   @Autowired
   public void setSipSystemsRepository(SipSystemsRepository sipSystemsRepository) {
@@ -44,8 +54,8 @@ public class PjsipFileGenrator {
   }
 
   @Autowired
-  public void setProfilesRepository(SipProfilesRepository profilesRepository) {
-    this.profilesRepository = profilesRepository;
+  public void setSipProfilesRepository(SipProfilesRepository sipProfilesRepository) {
+    this.sipProfilesRepository = sipProfilesRepository;
   }
 
   @Autowired
@@ -56,6 +66,8 @@ public class PjsipFileGenrator {
   public void run() {
     this.createGlobalSipSettings();
     this.createSipProfile();
+    this.createPjSip();
+    this.createPjSipTrunk();
     plineTools.reloadConfigurations();
   }
 
@@ -137,7 +149,7 @@ public class PjsipFileGenrator {
       plineTools.deleteAllFileInFolder(path);
     }
 
-    profilesRepository.findAll().forEach(p -> {
+    sipProfilesRepository.findAll().forEach(p -> {
       ArrayList<InfoConfiguration> infoConfigurations = new ArrayList<>();
 
       for (String pjSip : elementPjSip) {
@@ -169,6 +181,23 @@ public class PjsipFileGenrator {
 
       plineTools.writeinfoFile("sip-profiles", "sip-profile-" + p.getId(), infoConfigurations);
     });
+  }
+
+  private void createPjSipTrunk() {
+    sipTrunkRepository.findAllEnableProfiles(true).forEach(x -> {
+      InfoConfiguration ic = new InfoConfiguration("pjsip-trunk-" + x.getId());
+      ic.setBanner(true);
+
+    });
+  }
+
+  private void createPjSip() {
+    List<TblSipProfile> list = sipProfilesRepository.findAll();
+    List<String> configurations = new ArrayList<>();
+    list.forEach(x -> {
+      configurations.add("sip-profiles/sip-profile-" + x.getId() + ".conf");
+    });
+    plineTools.IncludeConfigFile("", "pjsip", configurations);
   }
 
 }
