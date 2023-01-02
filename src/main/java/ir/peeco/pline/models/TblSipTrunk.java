@@ -14,7 +14,7 @@ public class TblSipTrunk {
     public enum SipTrunkMode {
         NoRegister(0),
         Registrable(1),
-        register(2);
+        Register(2);
 
         public final int mode;
 
@@ -34,7 +34,7 @@ public class TblSipTrunk {
     @Column(nullable = false, length = 1024)
     private String acl = "";
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String username = "";
 
     @Column(nullable = false)

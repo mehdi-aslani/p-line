@@ -8,12 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
 import ir.peeco.pline.models.TblSipGlobals;
-import ir.peeco.pline.models.TblSipProfile;
-import ir.peeco.pline.models.TblSipProfileDetails;
 import ir.peeco.pline.models.TblSipSystems;
-import ir.peeco.pline.models.TblSipTrunk;
 import ir.peeco.pline.pline.InfoConfiguration;
 import ir.peeco.pline.pline.PlineTools;
 import ir.peeco.pline.repositories.SipGlobalsRepository;
@@ -21,6 +17,7 @@ import ir.peeco.pline.repositories.SipProfileDetailsRepository;
 import ir.peeco.pline.repositories.SipProfilesRepository;
 import ir.peeco.pline.repositories.SipSystemsRepository;
 import ir.peeco.pline.repositories.SipTrunksRepository;
+import ir.peeco.pline.repositories.SipUsersRepository;
 
 @Component
 @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
@@ -32,6 +29,12 @@ public class PjsipFileGenrator {
   private SipGlobalsRepository sipGlobalsRepository;
   private SipSystemsRepository sipSystemsRepository;
   private SipTrunksRepository sipTrunkRepository;
+  private SipUsersRepository sipUsersRepository;
+
+  @Autowired
+  public void setSipUsersRepository(SipUsersRepository sipUsersRepository) {
+    this.sipUsersRepository = sipUsersRepository;
+  }
 
   @Autowired
   public void setSipTrunkRepository(SipTrunksRepository sipTrunkRepository) {
@@ -67,8 +70,9 @@ public class PjsipFileGenrator {
     this.createGlobalSipSettings();
     this.createSipProfile();
     this.createPjSip();
-    this.createPjSipTrunk();
-    plineTools.reloadConfigurations();
+    this.createPjSipTrunks();
+    this.createPjsipUsers();
+    plineTools.reloadPjsip();
   }
 
   private void createGlobalSipSettings() {
@@ -160,6 +164,9 @@ public class PjsipFileGenrator {
         if (pjSip == "transport") {
           configuration.setDescription(
               "Profile Name: " + p.getName() + "\n" + "Profile Description: " + p.getDescription());
+          configuration.addElement("type", "transport");
+          // configuration.setTemplate("!");
+
         } else {
           configuration.setTemplate("!");
         }
@@ -183,21 +190,188 @@ public class PjsipFileGenrator {
     });
   }
 
-  private void createPjSipTrunk() {
-    sipTrunkRepository.findAllEnableProfiles(true).forEach(x -> {
-      InfoConfiguration ic = new InfoConfiguration("pjsip-trunk-" + x.getId());
-      ic.setBanner(true);
+  private void createPjSipTrunks() {
 
+    var listTrunks = sipTrunkRepository.findAllEnableProfiles(true);
+    String path = plineTools.getConfigPath() + "pjsip-trunks/";
+    if (new File(path).exists()) {
+      plineTools.deleteAllFileInFolder(path);
+    }
+
+    listTrunks.forEach(x -> {
+
+      List<InfoConfiguration> ics = new ArrayList<>();
+      switch (x.getRegisterMode()) {
+        case Register: {
+          InfoConfiguration auth = new InfoConfiguration("auth" + x.getUsername());
+          auth.setBanner(true);
+          auth.setDescription("Trunk Name: " + x.getName() + "\n" + "Profile Description: " + x.getDescription());
+          auth.setTemplate("auth-" + x.getSipProfile().getId());
+          auth.addElement("type", "auth");
+          auth.addElement("auth_type", "userpass");
+          auth.addElement("username", x.getUsername());
+          auth.addElement("password", x.getPassword());
+          ics.add(auth);
+          /******************************************************* */
+          InfoConfiguration aor = new InfoConfiguration(x.getUsername());
+          aor.setTemplate("aor-" + x.getSipProfile().getId());
+          aor.addElement("type", "aor");
+          aor.addElement("contact", "sip:" + x.getProxy());
+          ics.add(aor);
+          /******************************************************* */
+          InfoConfiguration endpoint = new InfoConfiguration(x.getUsername());
+          endpoint.setTemplate("endpoint-" + x.getSipProfile().getId());
+          endpoint.addElement("type", "endpoint");
+          endpoint.addElement("context", "pjsip-trunk-" + x.getId());
+          endpoint.addElement("aors", x.getUsername());
+          endpoint.addElement("outbound_auth", "auth" + x.getUsername());
+          endpoint.addElement("transport", "transport-" + x.getSipProfile().getId());
+          if (!x.getAcl().trim().isEmpty()) {
+            endpoint.addElement("acl", "acl-sip-trunk" + x.getId());
+          }
+          ics.add(endpoint);
+          /******************************************************* */
+          InfoConfiguration registeration = new InfoConfiguration(x.getUsername());
+          registeration.addElement("type", "registration");
+          registeration.addElement("outbound_auth", "auth" + x.getUsername());
+          registeration.addElement("server_uri", "sip:" + x.getProxy());
+          registeration.addElement("client_uri", "sip:" + x.getUsername() + "@" + x.getProxy());
+          registeration.addElement("retry_interval", 60);
+          ics.add(registeration);
+          /******************************************************* */
+          InfoConfiguration identify = new InfoConfiguration(x.getUsername());
+          identify.addElement("type", "identify");
+          identify.addElement("match", x.getProxy());
+          identify.addElement("endpoint", x.getUsername());
+          ics.add(identify);
+        }
+          break;
+
+        case Registrable: {
+          InfoConfiguration auth = new InfoConfiguration("auth" + x.getUsername());
+          auth.setBanner(true);
+          auth.setDescription("Trunk Name: " + x.getName() + "\n" + "Profile Description: " + x.getDescription());
+          auth.setTemplate("auth-" + x.getSipProfile().getId());
+          auth.addElement("type", "auth");
+          auth.addElement("auth_type", "userpass");
+          auth.addElement("username", x.getUsername());
+          auth.addElement("password", x.getPassword());
+          ics.add(auth);
+          /******************************************************* */
+          InfoConfiguration aor = new InfoConfiguration(x.getUsername());
+          aor.setTemplate("aor-" + x.getSipProfile().getId());
+          aor.addElement("type", "aor");
+          aor.addElement("max_contacts", 1);
+          aor.addElement("remove_existing", "yes");
+          ics.add(aor);
+          /******************************************************* */
+          InfoConfiguration endpoint = new InfoConfiguration(x.getUsername());
+          endpoint.setTemplate("endpoint-" + x.getSipProfile().getId());
+          endpoint.addElement("type", "endpoint");
+          endpoint.addElement("context", "pjsip-trunk-" + x.getId());
+          endpoint.addElement("rewrite_contact", "yes");
+          endpoint.addElement("aors", x.getUsername());
+          endpoint.addElement("auth", "auth" + x.getUsername());
+          endpoint.addElement("transport", "transport-" + x.getSipProfile().getId());
+          if (!x.getAcl().trim().isEmpty()) {
+            endpoint.addElement("acl", "acl-sip-trunk" + x.getId());
+          }
+          ics.add(endpoint);
+
+        }
+          break;
+
+        case NoRegister: {
+          String user = "trunk" + x.getId();
+          InfoConfiguration aor = new InfoConfiguration(user);
+          aor.setBanner(true);
+          aor.setDescription("Trunk Name: " + x.getName() + "\n" + "Profile Description: " + x.getDescription());
+          aor.setTemplate("aor-" + x.getSipProfile().getId());
+          aor.addElement("type", "aor");
+          aor.addElement("contact", "sip:" + x.getProxy());
+          ics.add(aor);
+          /******************************************************* */
+          InfoConfiguration endpoint = new InfoConfiguration(user);
+          endpoint.setTemplate("endpoint-" + x.getSipProfile().getId());
+          endpoint.addElement("type", "endpoint");
+          endpoint.addElement("transport", "transport-" + x.getSipProfile().getId());
+          endpoint.addElement("context", "pjsip-trunk-" + x.getId());
+          endpoint.addElement("aors", user);
+          endpoint.addElement("from_user", x.getFromUser());
+          endpoint.addElement("from_domain", x.getFromDomain());
+          if (!x.getAcl().trim().isEmpty()) {
+            endpoint.addElement("acl", "acl-sip-trunk" + x.getId());
+          }
+          ics.add(endpoint);
+          /******************************************************* */
+          InfoConfiguration identify = new InfoConfiguration(user);
+          identify.addElement("type", "identify");
+          identify.addElement("match", x.getProxy());
+          identify.addElement("endpoint", user);
+          ics.add(identify);
+        }
+          break;
+
+        default:
+          plineTools.plineLogger("Register Mode value not valid.");
+          break;
+      }
+      plineTools.writeinfoFile("pjsip-trunks", "psjsip-trunk-" + x.getId(), ics);
     });
   }
 
   private void createPjSip() {
-    List<TblSipProfile> list = sipProfilesRepository.findAll();
+
     List<String> configurations = new ArrayList<>();
-    list.forEach(x -> {
-      configurations.add("sip-profiles/sip-profile-" + x.getId() + ".conf");
-    });
+    if (sipProfileDetailsRepository.count() > 0)
+      configurations.add("sip-profiles/*.conf");
+    if (sipTrunkRepository.count() > 0)
+      configurations.add("pjsip-trunks/*.conf");
+    if (sipUsersRepository.count() > 0)
+      configurations.add("pjsip-users/*.conf");
     plineTools.IncludeConfigFile("", "pjsip", configurations);
   }
 
+  private void createPjsipUsers() {
+
+    var listExtensions = sipUsersRepository.findAllEnableProfiles(true);
+    String path = plineTools.getConfigPath() + "pjsip-users/";
+    if (new File(path).exists()) {
+      plineTools.deleteAllFileInFolder(path);
+    }
+
+    listExtensions.forEach(x -> {
+      List<InfoConfiguration> ics = new ArrayList<>();
+      InfoConfiguration auth = new InfoConfiguration("auth" + x.getUid());
+      auth.setBanner(true);
+      auth.setTemplate("auth-" + x.getSipProfile().getId());
+      auth.addElement("type", "auth");
+      auth.addElement("auth_type", "userpass");
+      auth.addElement("username", x.getUid());
+      auth.addElement("password", x.getPassword());
+      ics.add(auth);
+      /******************************************************* */
+      InfoConfiguration aor = new InfoConfiguration(x.getUid());
+      aor.setTemplate("aor-" + x.getSipProfile().getId());
+      aor.addElement("type", "aor");
+      aor.addElement("max_contacts", 1);
+      aor.addElement("remove_existing", "yes");
+      ics.add(aor);
+      /******************************************************* */
+      InfoConfiguration endpoint = new InfoConfiguration(x.getUid());
+      endpoint.setTemplate("endpoint-" + x.getSipProfile().getId());
+      endpoint.addElement("type", "endpoint");
+      endpoint.addElement("context", "sip-user-" + x.getId());
+      endpoint.addElement("rewrite_contact", "yes");
+      endpoint.addElement("aors", x.getUid());
+      endpoint.addElement("auth", "auth" + x.getUid());
+      endpoint.addElement("transport", "transport-" + x.getSipProfile().getId());
+      if (!x.getAcl().trim().isEmpty()) {
+        endpoint.addElement("acl", "acl-sip-user" + x.getId());
+      }
+      ics.add(endpoint);
+      plineTools.writeinfoFile("pjsip-users", x.getUid(), ics);
+    });
+
+  }
 }

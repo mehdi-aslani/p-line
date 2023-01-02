@@ -32,7 +32,7 @@ public class TblSipParameter {
   @Column(name = "default_value")
   private String defaultValue;
 
-  @Column(length = 255)
+  @Column(length = 1024)
   private String description;
 
 }

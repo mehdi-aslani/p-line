@@ -6,37 +6,37 @@ import javax.persistence.*;
 
 @Data
 @Table
-@Entity
+@Entity(name = "tbl_sip_users")
 public class TblSipUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long id;
+    private long id;
 
     @Column(nullable = false, unique = true, length = 20)
-    public String uid;
+    private String uid = "";
 
-    public String parallel;
+    private TblSipUser[] parallels = null;
 
-    public String acl;
+    private String acl = null;
 
     @Column(unique = true, length = 32)
-    public String password;
+    private String password = "";
 
-    public String effectiveCallerIdNumber;
+    private String effectiveCallerIdNumber = "";
 
-    public String effectiveCallerIdName;
+    private String effectiveCallerIdName = "";
 
-    public String outboundCallerIdNumber;
+    private String outboundCallerIdNumber = "";
 
-    public String outboundCallerIdName;
-
-    @OneToOne
-    public TblSipProfile tblSipProfile;
+    private String outboundCallerIdName = "";
 
     @OneToOne
-    public TblSipUserGroup tblSipUserGroup;
+    private TblSipProfile sipProfile = null;
 
-    public boolean enable;
+    @OneToOne
+    private TblSipUserGroup sipUserGroup = null;
+
+    private boolean enable = true;
 
 }

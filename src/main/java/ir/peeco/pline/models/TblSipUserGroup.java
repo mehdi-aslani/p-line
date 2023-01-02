@@ -11,12 +11,12 @@ public class TblSipUserGroup {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int id;
+    private int id;
 
     @Column(nullable = false, unique = true)
-    public String name;
+    private String name;
 
     @Column(length = 1024)
-    public String description;
+    private String description;
 
 }

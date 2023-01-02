@@ -2,26 +2,23 @@ package ir.peeco.pline.init;
 
 import ir.peeco.pline.models.TblSipProfile;
 import ir.peeco.pline.models.TblSipProfileDetails;
+import ir.peeco.pline.models.TblSipUser;
 import ir.peeco.pline.models.PlineUser;
 import ir.peeco.pline.models.TblSipParameter;
 import ir.peeco.pline.pline.PlineTools;
+import ir.peeco.pline.pline.fileGenratorTools.FileGenrator;
 import ir.peeco.pline.repositories.PlineUsersRepository;
 import ir.peeco.pline.repositories.SipParameterRepository;
 import ir.peeco.pline.repositories.SipProfileDetailsRepository;
 import ir.peeco.pline.repositories.SipProfilesRepository;
+import ir.peeco.pline.repositories.SipUsersRepository;
 import ir.peeco.pline.tools.GlobalsTools;
-
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 
 @Configuration
 public class Initializer {
@@ -31,6 +28,24 @@ public class Initializer {
     private PlineUsersRepository plineUsersRepository;
     private SipProfilesRepository sipProfilesRepository;
     private SipProfileDetailsRepository profileDetailsRepository;
+    private SipParameterRepository parameterRepository;
+    private FileGenrator fileGenrator;
+    private SipUsersRepository sipUsersRepository;
+
+    @Autowired
+    public void setSipUsersRepository(SipUsersRepository sipUsersRepository) {
+        this.sipUsersRepository = sipUsersRepository;
+    }
+
+    @Autowired
+    public void setFileGenrator(FileGenrator fileGenrator) {
+        this.fileGenrator = fileGenrator;
+    }
+
+    @Autowired
+    public void setParameterRepository(SipParameterRepository parameterRepository) {
+        this.parameterRepository = parameterRepository;
+    }
 
     @Autowired
     public void setUsersRepository(PlineUsersRepository usersRepository) {
@@ -54,39 +69,38 @@ public class Initializer {
         this.plineTools = plineTools;
     }
 
-    private SipParameterRepository sipParameterRepository;
-
-    @Autowired
-    public void setSipParameterRepository(SipParameterRepository sipParameterRepository) {
-        this.sipParameterRepository = sipParameterRepository;
-    }
-
     @Bean
     public CommandLineRunner init() {
         return args -> {
 
-            ArrayList<TblSipParameter> list = new ArrayList<>();
-            var data = (HashMap<String, Object>) GlobalsTools.getSipParameters().get("sip_profiles");
-            data.forEach((k, v) -> {
-                for (var string : ((ArrayList) v)) {
-                    TblSipParameter p = new TblSipParameter();
-                    p.setGroup(k);
-                    var f = ((ArrayList) string);
-                    p.setId(null);
-                    p.setName(f.get(0).toString());
-                    p.setType(f.get(1).toString());
-                    p.setOptions(f.get(2) == null ? "" : f.get(2).toString());
-                    p.setDefaultValue(f.get(3).toString());
-                    p.setDescription(f.get(4).toString());
-                    list.add(p);
-                }
-            });
+            // ArrayList<TblSipParameter> list = new ArrayList<>();
+            // var data = (HashMap<String, Object>)
+            // GlobalsTools.getSipParameters().get("sip_profiles");
+            // data.forEach((k, v) -> {
+            // for (var string : ((ArrayList) v)) {
+            // TblSipParameter p = new TblSipParameter();
+            // p.setGroup(k);
+            // var f = ((ArrayList) string);
+            // p.setId(null);
+            // p.setName(f.get(0).toString());
+            // p.setType(f.get(1).toString());
+            // p.setOptions(f.get(2) == null ? "" : f.get(2).toString());
+            // p.setDefaultValue(f.get(3).toString());
+            // p.setDescription(f.get(4).toString());
+            // list.add(p);
+            // }
+            // });
+            // ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+            // String json = ow.writeValueAsString(list);
+            // PrintWriter p = new PrintWriter("./pjsip_parameters.json");
+            // p.println(json);
+            // p.close();
 
-            ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-            String json = ow.writeValueAsString(list);
-            PrintWriter p = new PrintWriter("./pjsip_parameters.json");
-            p.println(json);
-            p.close();
+            if (parameterRepository.count() == 0) {
+                Iterable<TblSipParameter> iterator = Arrays.asList(GlobalsTools.getpjSipParameters());
+                parameterRepository.saveAll(iterator);
+            }
+
             plineTools.getRandomString(10);
 
             if (plineUsersRepository.findByUsername("admin") == null) {
@@ -141,6 +155,19 @@ public class Initializer {
                     d.value = objects[3].toString();
                     profileDetailsRepository.save(d);
                 }
+
+                for (int i = 1001; i < 1005; i++) {
+                    var user = new TblSipUser();
+                    user.setAcl("192.168.0.0/24,172.16.0.0/22");
+                    user.setUid(String.valueOf(i));
+                    user.setPassword(String.valueOf(i));
+                    user.setSipProfile(profileU);
+                    user.setEffectiveCallerIdName("user " + i);
+                    user.setEffectiveCallerIdNumber(String.valueOf(i));
+                    user.setOutboundCallerIdName("pline " + i);
+                    user.setOutboundCallerIdNumber(String.valueOf(i));
+                    sipUsersRepository.save(user);
+                }
             }
             if (banner == null || banner.trim().isEmpty())
                 System.out.println("\n" +
@@ -152,6 +179,7 @@ public class Initializer {
                         "\t\t\t# ██║           ███████╗██║██║ ╚████║███████╗ #\n" +
                         "\t\t\t# ╚═╝           ╚══════╝╚═╝╚═╝  ╚═══╝╚══════╝ #\n" +
                         "\t\t\t***********************************************\n");
+            fileGenrator.GratePjsip();
         };
     };
 

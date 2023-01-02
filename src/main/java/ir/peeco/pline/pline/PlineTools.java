@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -102,13 +103,21 @@ public class PlineTools {
     public String execCoreCommand(String command) {
 
         this.plineLogger("Exec Core Command: " + command);
-        String result = this.ExecLinuxCli("/usr/sbin/" + this.core, Arrays.asList(" -x '" + command + "'"), true);
+        String result = this.ExecLinuxCli("/usr/sbin/" + this.core, Arrays.asList(" -x \"" + command + "\""), true);
         this.plineLogger("Exec Core Command Result: " + result);
         return result;
     }
 
+    public String reloadPjsip() {
+        return execCoreCommand("pjsip reload");
+    }
+
+    public String reloadAcl() {
+        return execCoreCommand("acl reload");
+    }
+
     public void reloadConfigurations() {
-        execCoreCommand("module reload");
+        execCoreCommand("reload");
     }
 
     public boolean checkSipUid(String uid) {
@@ -136,6 +145,13 @@ public class PlineTools {
                 listOfFiles[i].delete();
             }
         }
+    }
+
+    public boolean writeinfoFile(String folder, String filename, InfoConfiguration iniConfiguration) {
+
+        List<InfoConfiguration> list = new ArrayList<>();
+        list.add(iniConfiguration);
+        return writeinfoFile(folder, filename, list);
     }
 
     public boolean writeinfoFile(String folder, String filename, List<InfoConfiguration> iniConfigurations) {
@@ -169,6 +185,7 @@ public class PlineTools {
 
             boolean bannerSetInFirst = false;
             for (InfoConfiguration ic : iniConfigurations) {
+
                 if (ic.isBanner() && bannerSetInFirst == false) {
                     fileWriter.println(this.getBanner());
                     bannerSetInFirst = true;
@@ -181,18 +198,33 @@ public class PlineTools {
                     }
                     fileWriter.println();
                 }
-                if (!ic.getTemplate().isEmpty())
-                    fileWriter.println("[" + ic.getContext() + "](" + ic.getTemplate() + ")");
-                else
-                    fileWriter.println("[" + ic.getContext() + "]");
 
-                ic.getElements().forEach((key, value) -> {
-                    switch (key) {
+                // if context empty only write banner and description
+                if (ic.getContext() != null) {
+                    if (!ic.getTemplate().isEmpty())
+                        if (ic.getTemplates().size() == 1) {
+                            fileWriter.println("[" + ic.getContext() + "](" + ic.getTemplate() + ")");
+                        } else {
+                            String temp = "";
+                            for (String t : ic.getTemplates()) {
+                                temp += (t + ",");
+                            }
+                            if (!temp.isEmpty()) {
+                                temp = temp.substring(0, temp.length() - 1);
+                            }
+                            fileWriter.println("[" + ic.getContext() + "](" + temp + ")");
+                        }
+                    else
+                        fileWriter.println("[" + ic.getContext() + "]");
+                }
+
+                ic.getElements().forEach((e) -> {
+                    switch (e.getKey()) {
                         case "include":
-                            fileWriter.println("#include " + value);
+                            fileWriter.println("#include " + e.getValue());
                             break;
                         default:
-                            fileWriter.println(key + "=" + value);
+                            fileWriter.println(e.getKey() + "=" + e.getValue());
                             break;
                     }
                 });
@@ -207,6 +239,12 @@ public class PlineTools {
             this.plineLogger("Error in write info file: " + ex.getMessage());
         }
         return false;
+    }
+
+    public boolean IncludeConfigFile(String folder, String filename, String include) {
+        List<String> lst = new ArrayList<>();
+        lst.add(include);
+        return IncludeConfigFile(folder, filename, lst);
     }
 
     public boolean IncludeConfigFile(String folder, String filename, List<String> includes) {

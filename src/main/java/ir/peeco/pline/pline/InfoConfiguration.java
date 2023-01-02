@@ -1,29 +1,56 @@
 package ir.peeco.pline.pline;
 
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import ir.peeco.pline.tools.ElementObject;
 import lombok.Data;
 
 @Data
 public class InfoConfiguration {
 
-    private String template = "";
+    private List<String> templates = new ArrayList<>();
     private final String context;
-    private Map<String, Object> elements;
+    private List<ElementObject> elements;
     private boolean banner = false;
     private String description = "";
 
     public void addElement(String key, Object value) {
-        if (value instanceof Boolean)
-            elements.put(key, (boolean) value ? "yes" : "no");
-        else
-            elements.put(key, value);
+        ElementObject e;
+        if (value instanceof Boolean) {
+            e = new ElementObject(key, (boolean) value ? "yes" : "no");
+        } else {
+            e = new ElementObject(key, value);
+        }
+        elements.add(e);
+    }
+
+    public void setTemplate(String template) {
+        if (!templates.isEmpty())
+            this.templates.clear();
+        this.templates.add(template);
+    }
+
+    public String getTemplate() {
+        if (templates.isEmpty())
+            return "";
+        return templates.get(0);
+    }
+
+    public void addTemplate(String template) {
+        this.templates.add(template);
     }
 
     public InfoConfiguration(String context) {
         this.context = context;
-        this.elements = new LinkedHashMap<>();
+        this.elements = new ArrayList<>();
+    }
+
+    public InfoConfiguration() {
+        this.context = null;
+        this.elements = new ArrayList<>();
     }
 
 }
