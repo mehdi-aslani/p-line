@@ -1,10 +1,7 @@
 package ir.peeco.pline.pline;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import ir.peeco.pline.tools.ElementObject;
 import lombok.Data;
 
