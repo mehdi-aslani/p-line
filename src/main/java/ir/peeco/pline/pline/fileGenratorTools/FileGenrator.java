@@ -10,12 +10,12 @@ import org.springframework.stereotype.Component;
 @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class FileGenrator {
 
-  private PjsipFileGenrator pjsipFileGenrator;
+  private PjsipFileGenerator pjsipFileGenerator;
   private AclGenerator aclGenerator;
 
   @Autowired
-  public void setPjsipFileGenrator(PjsipFileGenrator pjsipFileGenrator) {
-    this.pjsipFileGenrator = pjsipFileGenrator;
+  public void setpjsipFileGenerator(PjsipFileGenerator pjsipFileGenerator) {
+    this.pjsipFileGenerator = pjsipFileGenerator;
   }
 
   @Autowired
@@ -25,6 +25,6 @@ public class FileGenrator {
 
   public void GratePjsip() {
     aclGenerator.run();
-    pjsipFileGenrator.run();
+    pjsipFileGenerator.run();
   }
 }

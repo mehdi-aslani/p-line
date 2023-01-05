@@ -2,7 +2,9 @@ package ir.peeco.pline.init;
 
 import ir.peeco.pline.models.TblSipProfile;
 import ir.peeco.pline.models.TblSipProfileDetails;
+import ir.peeco.pline.models.TblSipTrunk;
 import ir.peeco.pline.models.TblSipUser;
+import ir.peeco.pline.models.TblSipTrunk.SipTrunkMode;
 import ir.peeco.pline.models.PlineUser;
 import ir.peeco.pline.models.TblSipParameter;
 import ir.peeco.pline.pline.PlineTools;
@@ -11,6 +13,7 @@ import ir.peeco.pline.repositories.PlineUsersRepository;
 import ir.peeco.pline.repositories.SipParameterRepository;
 import ir.peeco.pline.repositories.SipProfileDetailsRepository;
 import ir.peeco.pline.repositories.SipProfilesRepository;
+import ir.peeco.pline.repositories.SipTrunksRepository;
 import ir.peeco.pline.repositories.SipUsersRepository;
 import ir.peeco.pline.tools.GlobalsTools;
 import java.util.Arrays;
@@ -31,6 +34,12 @@ public class Initializer {
     private SipParameterRepository parameterRepository;
     private FileGenrator fileGenrator;
     private SipUsersRepository sipUsersRepository;
+    private SipTrunksRepository sipTrunksRepository;
+
+    @Autowired
+    public void setSipTrunksRepository(SipTrunksRepository sipTrunksRepository) {
+        this.sipTrunksRepository = sipTrunksRepository;
+    }
 
     @Autowired
     public void setSipUsersRepository(SipUsersRepository sipUsersRepository) {
@@ -155,6 +164,19 @@ public class Initializer {
                     d.value = objects[3].toString();
                     profileDetailsRepository.save(d);
                 }
+
+                var trunk = new TblSipTrunk();
+                trunk.setAcl("");
+                trunk.setName("linphone.org");
+                trunk.setProxy("sip.linphone.org");
+                trunk.setUsername("aslani");
+                trunk.setPassword("Mehdi@6377");
+                // trunk.setFromDomain("172.16.3.77");
+                // trunk.setFromUser("mehdi-aslani");
+                trunk.setSipProfile(profileT);
+                trunk.setRegisterMode(SipTrunkMode.Register);
+                trunk.setDescription("Mehdi Aslani Skype Accont");
+                sipTrunksRepository.save(trunk);
 
                 for (int i = 1001; i < 1005; i++) {
                     var user = new TblSipUser();

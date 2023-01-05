@@ -4,6 +4,7 @@ import org.asteriskjava.fastagi.AgiServerThread;
 import org.asteriskjava.fastagi.DefaultAgiServer;
 import org.asteriskjava.live.DefaultAsteriskServer;
 import org.asteriskjava.manager.ManagerConnection;
+import org.asteriskjava.manager.ManagerConnectionFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -37,17 +38,18 @@ public class plineNetworkInit {
   private int poolSize;
 
   private DefaultAgiServer agiServer;
-
-  private static AgiServerThread agiServerThread;
+  private AgiServerThread agiServerThread;
 
   @Bean
   public CommandLineRunner ExtensionCallHandeler() {
     return args -> {
-      // ManagerConnectionFactory factory = new ManagerConnectionFactory(host, port,
-      // username, password);
-      // managerConnection = factory.createManagerConnection();
-      // asteriskServer = new DefaultAsteriskServer(managerConnection);
-      // asteriskServer.initialize();
+      if (plineHost != null && !plineHost.trim().equals("0.0.0.0")) {
+        ManagerConnectionFactory factory = new ManagerConnectionFactory(plineHost, plinePort,
+            plineUsername, plinePassword);
+        managerConnection = factory.createManagerConnection();
+        asteriskServer = new DefaultAsteriskServer(managerConnection);
+        asteriskServer.initialize();
+      }
 
       ExtensionCall call = new ExtensionCall();
       agiServer = new DefaultAgiServer(call);

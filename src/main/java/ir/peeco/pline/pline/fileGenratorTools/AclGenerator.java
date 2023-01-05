@@ -53,6 +53,8 @@ public class AclGenerator {
     List<InfoConfiguration> ics = new ArrayList<>();
 
     listTrunks.forEach(x -> {
+      if (x.getAcl().trim().isEmpty())
+        return;
       var aclName = "acl-sip-trunk" + x.getId();
       String[] aclList = x.getAcl().split("\n|,");
       if (aclList.length > 0) {
