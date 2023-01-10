@@ -6,25 +6,25 @@ import javax.persistence.*;
 
 @Data
 @Table
-@Entity
+@Entity(name = "tbl_outbound_routes")
 public class TblOutboundRoute {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long id;
+    private long id;
 
     @Column(unique = true)
-    public String name;
+    private String name = "";
 
     @Column(nullable = false)
-    public boolean publicRoute;
+    private boolean privateRoute = false;
 
     @Column(nullable = false)
-    public int sequential;
+    private int sequential = 0;
 
     @Column(length = 1024)
-    public String description;
+    private String description = "";
 
-    public boolean enable;
+    private boolean enable = true;
 
 }

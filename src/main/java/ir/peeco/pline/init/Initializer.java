@@ -15,6 +15,7 @@ import ir.peeco.pline.repositories.SipProfileDetailsRepository;
 import ir.peeco.pline.repositories.SipProfilesRepository;
 import ir.peeco.pline.repositories.SipTrunksRepository;
 import ir.peeco.pline.repositories.SipUsersRepository;
+import ir.peeco.pline.repositories.outboundRoutes.OutboundRoutePatternsTrunksRepository;
 import ir.peeco.pline.tools.GlobalsTools;
 import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ public class Initializer {
     private FileGenrator fileGenrator;
     private SipUsersRepository sipUsersRepository;
     private SipTrunksRepository sipTrunksRepository;
+    private OutboundRoutePatternsTrunksRepository outboundRoutePatternsTrunksRepository;
 
     @Autowired
     public void setSipTrunksRepository(SipTrunksRepository sipTrunksRepository) {

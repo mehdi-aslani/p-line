@@ -6,23 +6,22 @@ import javax.persistence.*;
 
 @Data
 @Table
-@Entity
+@Entity(name = "tbl_outbound_route_trunks")
 public class TblOutboundRouteTrunk {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long id;
+    private long id;
 
     @Column(nullable = false)
-    public int sequential;
+    private int sequential = 0;
 
     @OneToOne
-    public TblOutboundRoute tblOutboundRoute;
+    private TblOutboundRoute outboundRoute;
 
     @OneToOne
-    public TblSipTrunk tblSipTrunk;
+    private TblSipTrunk SipTrunk;
 
-    public boolean enable;
-
+    private boolean enable = true;
 
 }

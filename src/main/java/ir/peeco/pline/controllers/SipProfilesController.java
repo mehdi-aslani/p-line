@@ -55,7 +55,7 @@ public class SipProfilesController {
     }
 
     @GetMapping("/index")
-    public ResponseEntity<Object> index(@RequestParam(required = false) Map<String, String> params) {
+    public ResponseEntity<?> index(@RequestParam(required = false) Map<String, String> params) {
         int page = 0;
         if (params.get("page") != null) {
             page = Integer.parseInt(params.get("page"));
@@ -84,7 +84,7 @@ public class SipProfilesController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Object> get(@PathVariable Long id) {
+    public ResponseEntity<?> get(@PathVariable Long id) {
         var table = sipProfilesRepository.findById(id);
         return ResponseEntity.ok(table);
     }
@@ -115,6 +115,12 @@ public class SipProfilesController {
         result.put("error", error.size() > 0);
         result.put("errorsDesc", error);
         return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/get-all")
+    public ResponseEntity<?> getAllProfiles() {
+        var data = sipProfilesRepository.finadAllEnable(true);
+        return ResponseEntity.ok(data);
     }
 
 }

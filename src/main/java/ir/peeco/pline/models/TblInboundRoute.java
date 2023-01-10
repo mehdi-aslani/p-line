@@ -11,17 +11,17 @@ public class TblInboundRoute {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public long id;
+    private long id;
 
     @Column(unique = true, nullable = false)
-    public String name;
+    private String name = "";
 
-    public boolean publicRoute;
+    private boolean privateRoute = false;
 
-    public int sequential;
+    private int sequential = 0;
 
     @Column(length = 1024)
-    public String description;
+    private String description = "";
 
-    public boolean enable;
+    private boolean enable = true;
 }

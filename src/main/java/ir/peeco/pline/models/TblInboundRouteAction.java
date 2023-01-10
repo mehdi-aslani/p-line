@@ -14,7 +14,7 @@ public class TblInboundRouteAction {
     public long id;
 
     @OneToOne
-    public TblInboundRoute tblInboundRoute;
+    public TblInboundRoute inboundRoute;
 
     @Column(nullable = false)
     public String action;

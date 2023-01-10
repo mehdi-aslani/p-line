@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import ir.peeco.pline.models.TblSipTrunk;
+import ir.peeco.pline.models.TblSipTrunk.SipTrunkMode;
 import ir.peeco.pline.pline.ApiResult;
 import ir.peeco.pline.repositories.SipTrunksRepository;
 
@@ -80,9 +81,10 @@ public class SipTrunksController {
         if (sipTrunk.getName().trim().isEmpty()) {
             result.addMessage("'Name' cannot be Empty");
         }
-
-        if (sipTrunkRepository.countAllByName(sipTrunk.getName()) > 0) {
-            result.addMessage("The name is duplicate");
+        if (sipTrunk.getRegisterMode() != SipTrunkMode.NoRegister) {
+            if (sipTrunkRepository.countAllByName(sipTrunk.getName()) > 0) {
+                result.addMessage("The name is duplicate");
+            }
         }
 
         if (result.getMessages().size() == 0) {
@@ -102,9 +104,11 @@ public class SipTrunksController {
             result.addMessage("'Name' cannot be Empty");
         }
 
-        var data = sipTrunkRepository.findByName(sipTrunk.getName());
-        if (data != null && data.getId() != sipTrunk.getId()) {
-            result.addMessage("The name is duplicate");
+        if (sipTrunk.getRegisterMode() != SipTrunkMode.NoRegister) {
+            var data = sipTrunkRepository.findByName(sipTrunk.getName());
+            if (data != null && data.getId() != sipTrunk.getId()) {
+                result.addMessage("The name is duplicate");
+            }
         }
 
         if (result.getMessages().size() == 0) {

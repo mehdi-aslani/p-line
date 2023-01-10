@@ -19,4 +19,7 @@ public interface SipProfilesRepository extends JpaRepository<TblSipProfile, Long
     @Query(value = "SELECT t.* FROM #{#entityName} t WHERE t.id=:id", nativeQuery = true)
     TblSipProfile findSipProfileById(@Param("id") Long name);
 
+    @Query(value = "SELECT t.* FROM #{#entityName} t WHERE t.enable=:enable", nativeQuery = true)
+    TblSipProfile finadAllEnable(@Param("enable") boolean enable);
+
 }

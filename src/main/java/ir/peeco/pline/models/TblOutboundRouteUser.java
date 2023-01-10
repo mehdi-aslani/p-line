@@ -6,23 +6,22 @@ import javax.persistence.*;
 
 @Data
 @Table
-@Entity
+@Entity(name = "tbl_outbound_routeUsers")
 public class TblOutboundRouteUser {
 
   @Id
   @GeneratedValue()
-  public long id;
+  private long id;
 
   @OneToOne
-  public TblOutboundRoute tblOutboundRoute;
-  
+  private TblOutboundRoute outboundRoute;
+
   @OneToOne
-  public TblSipUser tblSipUser;
+  private TblSipUser sipUser;
 
   @Column(nullable = false)
-  public int duration;
-  
-  public long enable;
+  private int duration = 0;
 
+  private boolean enable = true;
 
 }
