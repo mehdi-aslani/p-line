@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -65,8 +66,8 @@ public class SipTrunksController {
         return ResponseEntity.ok(table);
     }
 
-    @GetMapping("/get")
-    public ResponseEntity<?> get(@RequestParam(name = "id") Long id) {
+    @GetMapping("/get/{id}")
+    public ResponseEntity<?> get(@PathVariable(name = "id") Long id) {
         var data = sipTrunkRepository.findById(id);
         if (data.isEmpty())
             return ResponseEntity.ok(new TblSipTrunk());

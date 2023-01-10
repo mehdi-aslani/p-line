@@ -1,5 +1,7 @@
 package ir.peeco.pline.repositories;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,7 +21,9 @@ public interface SipProfilesRepository extends JpaRepository<TblSipProfile, Long
     @Query(value = "SELECT t.* FROM #{#entityName} t WHERE t.id=:id", nativeQuery = true)
     TblSipProfile findSipProfileById(@Param("id") Long name);
 
+    
     @Query(value = "SELECT t.* FROM #{#entityName} t WHERE t.enable=:enable", nativeQuery = true)
-    TblSipProfile finadAllEnable(@Param("enable") boolean enable);
+    List<TblSipProfile> finadAllEnable(@Param("enable") boolean enable);
+
 
 }
